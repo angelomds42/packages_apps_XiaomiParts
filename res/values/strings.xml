@@ -56,4 +56,8 @@
     <string name="image_preview_content_description">Preview</string>
     <string name="image_preview_next_page_content_description">Next</string>
     <string name="image_preview_previous_page_content_description">Previous</string>
+
+    <!-- Clear Speaker -->
+    <string name="clear_speaker_title">Clear speaker</string>
+    <string name="clear_speaker_summary">Plays a 30-second audio to clear the speaker. If the speaker is lightly blocked, run this feature once or twice.</string>
 </resources>

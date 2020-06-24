@@ -5,6 +5,8 @@
 | **Display** | `Automatic high brightness mode (HBM)` | Enable peak luminance based on sunlight | Yes |
 |  | `Automatic DC Dimming` | Enable anti-flicker mode based on screen brightness | Yes |
 |  | `Saturation` | Control the saturation level of the display | Yes |
+| **Sound** | `Clear speaker` | Plays a 30-second audio to clear the speaker | No |
+
 
 ## Including XiaomiParts
 

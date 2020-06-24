@@ -32,6 +32,9 @@ public class Constants {
     }
     public static final int DEFAULT_AUTO_DC_DIMMING_THRESHOLD = 50;
 
+    // Clear Speaker
+    public static final String KEY_CLEAR_SPEAKER = "clear_speaker_pref";
+
     // Brightness
     public static final String KEY_CURRENT_BRIGHTNESS_LEVEL = "current_brightness_level";
 

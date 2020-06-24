@@ -51,4 +51,8 @@
     <string name="image_preview_content_description">Pré-visualização</string>
     <string name="image_preview_next_page_content_description">Próximo</string>
     <string name="image_preview_previous_page_content_description">Anterior</string>
+
+    <!-- Clear Speaker -->
+    <string name="clear_speaker_title">Limpar alto-falante</string>
+    <string name="clear_speaker_summary">Executa um áudio de 30 segundos para limpar o alto-falante. Se o alto-falante estiver levemente obstruído, execute esta função de uma a duas vezes.</string>
 </resources>
