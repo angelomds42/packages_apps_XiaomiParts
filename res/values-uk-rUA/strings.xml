@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2023-2024 The Evolution X Project
+                   2016-2022 crDroid Android Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- PixelParts -->
+    <string name="pixel_parts_title">Частини пікселів</string>
+    <string name="kernel_node_access_error">Не вдалося отримати доступ до вузла ядра! Будь ласка, переконайтеся, що наданий шлях до атрибуту sysfs або procfs є точним, що він має відповідні дозволи, і правила SELinux належним чином налаштовані.</string>
+    <string name="kernel_node_returned_value_unknown">Не знайдено рядкового ресурсу для значення, яке повернуло вузол.</string>
+    <string name="tile_add">Додати плитку</string>
+    <string name="tile_added">Цю плитку додано</string>
+    <string name="tile_not_added">Плитку не додано</string>
+    <string name="tile_already_added">Плитку вже додано</string>
+    <string name="tile_on">Увімкнено</string>
+    <string name="tile_off">Вимкнено</string>
+    <string name="tile_camera_in_use">Використовується камера</string>
+    <!-- Charge control -->
+    <string name="charge_control_title">Відсоткове керування зарядом</string>
+    <string name="charge_control_summary">Контролювати коли пристрій припиняє роботу та запускається заряджання</string>
+    <string name="charge_control_main_switch_title">Використовуйте контроль заряду зі відсотками</string>
+    <string name="stop_charging_title">Рівень зупинки зарядки</string>
+    <string name="stop_charging_summary">Припинити заряджання при досягненні відсотка</string>
+    <string name="start_charging_title">Почати заряджання</string>
+    <string name="start_charging_summary">Продовжити заряджання при досягненні відсотка</string>
+    <string name="stop_below_start_error">Рівень зупинки повинен бути вище початкового рівня!</string>
+    <string name="start_above_stop_error">Початковий рівень повинен бути нижче рівня зупинки!</string>
+    <string name="charge_control_footer_summary">Контроль заряду може заважати адаптаційному заряду.</string>
+    <!-- Pixel torch -->
+    <string name="pixel_torch_title">Піксельний факел</string>
+    <string name="pixel_torch_summary">Налаштовувана плитка ліхтарика і кнопка гучності</string>
+    <string name="pixel_torch_cycle_modes_title">Режими циклу</string>
+    <string name="pixel_torch_cycle_modes_summary">Перемикання між попередньо визначеними рівнями стійкості</string>
+    <string name="pixel_torch_state">Стан: %d</string>
+    <string name="pixel_torch_first_click_title">Перше натискання</string>
+    <string name="pixel_torch_second_click_title">Друге натискання</string>
+    <string name="pixel_torch_third_click_title">Третє натискання</string>
+    <string name="pixel_torch_button_service_title">Служба кнопок гучності</string>
+    <string name="pixel_torch_button_service_summary">Перемикач ліхтарика Pixel при натисканні обох кнопок гучності одночасно</string>
+    <string name="pixel_torch_button_service_description">Ця служба доступності зчитує ключові події, а конкретно, кнопки збільшення та зменшення гучності, щоб увімкнути ліхтарик Pixel. Ця служба не збирає жодних даних із вашого пристрою.\n\nЯкщо ввімкнути ярлик «Утримувати клавішу гучності» на цій сторінці, це перевизначить ключову подію, через що служба не працюватиме.\n\nЦя служба не працюватиме, коли екран вимкнено під час відтворення аудіо (незалежно від того, який пристрій виведення).</string>
+    <!-- Auto hbm -->
+    <string name="auto_hbm_title">Автоматична HBM</string>
+    <string name="auto_hbm_main_switch_title">Використовувати автоматичний HBM</string>
+    <string name="auto_hbm_summary">Автоматично вмикати режим високої яскравості в залежності від інтенсивності сонячного світла (lux)</string>
+    <string name="auto_hbm_threshold_title">Світлий поріг</string>
+    <string name="auto_hbm_threshold_summary">Визначте поріг інтенсивності світла в одиницях люкс, при якому активується HBM</string>
+    <string name="auto_hbm_enable_time_title">Увімкнути час</string>
+    <string name="auto_hbm_enable_time_summary">Тривалість у секундах, протягом якої поріг світла має постійно досягатися, щоб активувати HBM</string>
+    <string name="auto_hbm_disable_time_title">Вимкнути час</string>
+    <string name="auto_hbm_disable_time_summary">Тривалість у секундах, протягом якої HBM вимикається, якщо поріг освітленості падає нижче встановленого рівня</string>
+    <!-- Saturation -->
+    <string name="saturation_title">Насиченість</string>
+    <string name="saturation_summary">Керування насиченістю дисплею</string>
+    <string name="saturation_footer_summary">Зміна режиму кольору в налаштуваннях екрану призведе до перевизначення рівня насиченості, що вимагає перезастосування.</string>
+    <!-- Custom seekbar -->
+    <string name="custom_seekbar_value">Значення: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">за замовчуванням</string>
+    <string name="custom_seekbar_default_value_to_set">Значення за замовчуванням: <xliff:g id="v">%s</xliff:g>\nУтримуйте для встановлення</string>
+    <string name="custom_seekbar_default_value_is_set">Значення за замовчуванням встановлено</string>
+    <!-- Image preview -->
+    <string name="image_preview_content_description">Попередній перегляд</string>
+    <string name="image_preview_next_page_content_description">Наступний</string>
+    <string name="image_preview_previous_page_content_description">Попередній</string>
+</resources>
