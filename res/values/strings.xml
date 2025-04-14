@@ -18,18 +18,6 @@
     <string name="tile_off">Off</string>
     <string name="tile_camera_in_use">Camera in use</string>
 
-    <!-- Charge control -->
-    <string name="charge_control_title">Percentage-based charge control</string>
-    <string name="charge_control_summary">Control when the device stops and starts charging</string>
-    <string name="charge_control_main_switch_title">Use percentage-based charge control</string>
-    <string name="stop_charging_title">Stop charging level</string>
-    <string name="stop_charging_summary">Stop charging when the set percentage is reached</string>
-    <string name="start_charging_title">Start charging level</string>
-    <string name="start_charging_summary">Resume charging when the set percentage is reached</string>
-    <string name="stop_below_start_error">Stop level must be above start level!</string>
-    <string name="start_above_stop_error">Start level must be below stop level!</string>
-    <string name="charge_control_footer_summary">Charge control may interfere with adaptive charging.</string>
-
     <!-- Pixel torch -->
     <string name="pixel_torch_title">Pixel torch</string>
     <string name="pixel_torch_summary">A configurable flashlight tile and volume button service</string>

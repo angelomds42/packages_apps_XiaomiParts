@@ -4,7 +4,6 @@
 
 | Category | Feature | Description | QS Tile | Required kernel changes |
 | --- | --- | --- | --- | --- |
-| | `Charge control` | Start/stop charging at specific percentages | N/A | N/A | 
 | **Display** | `Automatic high brightness mode (HBM)` | Enable peak luminance based on sunlight | Yes | N/A |
 |  | `Saturation` | Control the saturation level of the display | Yes | N/A |
 | **Leds** | `Pixel torch` | Adjust the brightness of the PixelParts flashlight QS-Tile | PixelParts Flashlight QS | N/A |

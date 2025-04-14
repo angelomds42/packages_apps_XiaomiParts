@@ -78,22 +78,6 @@
                 android:value="true" />
         </service>
 
-        <!-- Charge control activity -->
-        <activity
-            android:name=".chargecontrol.ChargeControlActivity"
-            android:label="@string/charge_control_title"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.settings.action.IA_SETTINGS" />
-            </intent-filter>
-            <meta-data
-                android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.battery" />
-            <meta-data
-                android:name="com.android.settings.summary"
-                android:resource="@string/charge_control_summary" />
-        </activity>
-
         <!-- Pixel torch activity -->
         <activity
             android:name=".pixeltorch.PixelTorchActivity"
