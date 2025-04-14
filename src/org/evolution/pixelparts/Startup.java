@@ -12,7 +12,6 @@ import android.content.Intent;
 import org.evolution.pixelparts.autohbm.AutoHbmActivity;
 import org.evolution.pixelparts.autohbm.AutoHbmFragment;
 import org.evolution.pixelparts.autohbm.AutoHbmTileService;
-import org.evolution.pixelparts.chargecontrol.ChargeControlFragment;
 import org.evolution.pixelparts.pixeltorch.PixelTorchActivity;
 import org.evolution.pixelparts.pixeltorch.PixelTorchFragment;
 import org.evolution.pixelparts.pixeltorch.PixelTorchButtonService;
@@ -41,10 +40,6 @@ public class Startup extends BroadcastReceiver {
                 AutoHbmTileService.class,
                 AutoHbmFragment.isHbmSupported(context)
         );
-
-        // Charge control
-        ChargeControlFragment.restoreStartChargingSetting(context);
-        ChargeControlFragment.restoreStopChargingSetting(context);
 
         // PixelTorch
         ComponentUtils.toggleComponent(

@@ -7,15 +7,6 @@ package org.evolution.pixelparts;
 
 public class Constants {
 
-    // Charge control
-    public static final String KEY_CHARGE_CONTROL = "charge_control";
-    public static final String KEY_STOP_CHARGING = "stop_charging";
-    public static final String KEY_START_CHARGING = "start_charging";
-    public static final String NODE_STOP_CHARGING = "/sys/devices/platform/google,charger/charge_stop_level";
-    public static final String NODE_START_CHARGING = "/sys/devices/platform/google,charger/charge_start_level";
-    public static final String DEFAULT_STOP_CHARGING = "100";
-    public static final String DEFAULT_START_CHARGING = "0";
-
     // Pixel torch
     public static final String KEY_PIXEL_TORCH_CYCLE_MODES = "pixel_torch_cycle_modes";
     public static final String KEY_PIXEL_TORCH_BUTTON_SERVICE = "pixel_torch_button_service";
