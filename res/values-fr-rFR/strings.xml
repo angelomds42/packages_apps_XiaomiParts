@@ -5,8 +5,8 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- PixelParts -->
-    <string name="pixel_parts_title">Customisation Pixel</string>
+    <!-- XiaomiParts -->
+    <string name="xiaomi_parts_title">Customisation Pixel</string>
     <string name="kernel_node_access_error">L\'accès au nœud du noyau a échoué ! Veuillez vous assurer que le chemin fourni vers l\'attribut sysfs ou procfs est exact, qu\'il dispose des autorisations appropriées et que les politiques SELinux sont correctement configurées.</string>
     <string name="kernel_node_returned_value_unknown">Aucun texte trouvé pour la valeur retournée par le noeud.</string>
     <string name="tile_add">Ajouter une tuile</string>
@@ -27,18 +27,6 @@
     <string name="stop_below_start_error">Le niveau d\'arrêt doit être supérieur au niveau de départ !</string>
     <string name="start_above_stop_error">Le niveau de départ doit être inférieur au niveau d\'arrêt !</string>
     <string name="charge_control_footer_summary">Le contrôle de la charge peut interférer avec le chargement adaptatif.</string>
-    <!-- Pixel torch -->
-    <string name="pixel_torch_title">Lampe de poche Pixel</string>
-    <string name="pixel_torch_summary">Un service configurable de tuiles pour la lampe de poche et le bouton de volume</string>
-    <string name="pixel_torch_cycle_modes_title">Modes de cycle</string>
-    <string name="pixel_torch_cycle_modes_summary">Cycle entre les niveaux de force prédéfinis</string>
-    <string name="pixel_torch_state">État: %d</string>
-    <string name="pixel_torch_first_click_title">Premier clic</string>
-    <string name="pixel_torch_second_click_title">Deuxième clic</string>
-    <string name="pixel_torch_third_click_title">Troisième clic</string>
-    <string name="pixel_torch_button_service_title">Service des boutons de volume</string>
-    <string name="pixel_torch_button_service_summary">Activer/désactiver la lampe de poche lorsque vous appuyez simultanément sur les deux boutons de volume</string>
-    <string name="pixel_torch_button_service_description">Ce service d\'accessibilité écoute les événements clés, en particulier les boutons de volume haut et bas, pour activer/désactiver la lampe de poche. Ce service ne collecte aucune donnée de votre appareil.\n\nActiver le raccourci \"Maintenir la touche de volume\" sur cette page remplacera l\'événement clé, causant le dysfonctionnement du service.\n\nCe service ne fonctionnera pas lorsque l\'écran est éteint pendant la lecture de l\'audio (quel que soit le périphérique de sortie).</string>
     <!-- Auto hbm -->
     <string name="auto_hbm_title">HBM automatique</string>
     <string name="auto_hbm_main_switch_title">Utiliser le mode haute luminausité automatique</string>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Auto hbm -->
+    <string name="config_autoHbmNode">/sys/devices/platform/soc/soc:qcom,dsi-display-primary/hbm</string>
+    <bool name="config_autoHbmSupported">false</bool>
+
+</resources>

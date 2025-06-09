@@ -5,8 +5,8 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- PixelParts -->
-    <string name="pixel_parts_title">Pixel Parts</string>
+    <!-- XiaomiParts -->
+    <string name="xiaomi_parts_title">Xiaomi Parts</string>
     <string name="kernel_node_access_error">Ошибка доступа к узлу ядра! Пожалуйста, убедитесь, что указанный путь к атрибуту sysfs или procfs точен, имеет соответствующие разрешения, и политики SELinux правильно настроены.</string>
     <string name="kernel_node_returned_value_unknown">Не найден строковый ресурс для значения, возвращенного узлом.</string>
     <string name="tile_add">Добавить плитку</string>
@@ -27,18 +27,6 @@
     <string name="stop_below_start_error">Уровень остановки должен быть выше уровня старта!</string>
     <string name="start_above_stop_error">Уровень старта должен быть ниже уровня остановки!</string>
     <string name="charge_control_footer_summary">Контроль заряда может вмешиваться в работу адаптивной зарядки.</string>
-    <!-- Pixel torch -->
-    <string name="pixel_torch_title">Фонарик Pixel</string>
-    <string name="pixel_torch_summary">Настраиваемая плитка фонарика и служба кнопок громкости</string>
-    <string name="pixel_torch_cycle_modes_title">Циклическое переключение режимов</string>
-    <string name="pixel_torch_cycle_modes_summary">Переключение между предустановленными уровнями яркости</string>
-    <string name="pixel_torch_state">Состояние: %d</string>
-    <string name="pixel_torch_first_click_title">Первое нажатие</string>
-    <string name="pixel_torch_second_click_title">Второе нажатие</string>
-    <string name="pixel_torch_third_click_title">Третье нажатие</string>
-    <string name="pixel_torch_button_service_title">Сервис кнопок громкости</string>
-    <string name="pixel_torch_button_service_summary">Включение/выключение фонарика Pixel при одновременном нажатии обеих кнопок громкости</string>
-    <string name="pixel_torch_button_service_description">Cервис отслеживает нажатия клавиш, в частности кнопок увеличения и уменьшения громкости, для включения/выключения фонарика Pixel. Данный сервис не собирает никаких данных с вашего устройства.\n\nВключение сочетания клавиш \"Удержание кнопки громкости\" на этой странице переопределит событие нажатия клавиши, в результате чего сервис не будет работать.\n\nЭтот сервис не будет работать, когда экран выключен и воспроизводится аудио (независимо от устройства вывода).</string>
     <!-- Auto hbm -->
     <string name="auto_hbm_title">Автоматический HBM</string>
     <string name="auto_hbm_main_switch_title">Использовать автоматический HBM</string>

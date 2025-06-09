@@ -7,13 +7,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           android:sharedUserId="android.uid.system"
-          package="org.evolution.pixelparts"
+          package="org.lineageos.settings"
           android:versionCode="2"
           android:versionName="2.0" >
 
     <application
         android:icon="@drawable/ic_launcher_settings"
-        android:label="@string/pixel_parts_title"
+        android:label="@string/xiaomi_parts_title"
         android:defaultToDeviceProtectedStorage="true"
         android:directBootAware="true"
         android:theme="@style/Theme.SubSettingsBase"
@@ -68,50 +68,6 @@
             android:name=".autohbm.AutoHbmTileService"
             android:label="@string/auto_hbm_title"
             android:icon="@drawable/ic_auto_hbm_tile"
-            android:exported="true"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
-                android:value="true" />
-        </service>
-
-        <!-- Pixel torch activity -->
-        <activity
-            android:name=".pixeltorch.PixelTorchActivity"
-            android:label="@string/pixel_torch_title"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.settings.action.IA_SETTINGS" />
-            </intent-filter>
-            <meta-data
-                android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.apps" />
-            <meta-data
-                android:name="com.android.settings.summary"
-                android:resource="@string/pixel_torch_summary" />
-        </activity>
-
-        <!-- Pixel torch button service -->
-        <service
-            android:name=".pixeltorch.PixelTorchButtonService"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService" />
-            </intent-filter>
-            <meta-data
-                android:name="android.accessibilityservice"
-                android:resource="@xml/pixel_torch_button_service_config" />
-        </service>
-
-        <!-- Pixel torch tile service -->
-        <service
-            android:name=".pixeltorch.PixelTorchTileService"
-            android:label="@string/pixel_torch_title"
-            android:icon="@drawable/ic_pixel_torch_tile"
             android:exported="true"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>

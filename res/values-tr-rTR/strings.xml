@@ -5,8 +5,8 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- PixelParts -->
-    <string name="pixel_parts_title">Pixel Araçları</string>
+    <!-- XiaomiParts -->
+    <string name="xiaomi_parts_title">Xiaomi Araçları</string>
     <string name="kernel_node_access_error">Kernel devresine erişim başarısız oldu! Lütfen sysfs veya procfs yolunun doğru olup olmadığını, gerekli izinlere sahip olup olmadığını ve SELinux durumunun doğru ayarlanıp ayarlanmadığını kontrol edin.</string>
     <string name="kernel_node_returned_value_unknown">Düğümün döndürdüğü değer için dize kaynağı bulunamadı.</string>
     <string name="tile_add">Kutu ekle</string>
@@ -27,18 +27,6 @@
     <string name="stop_below_start_error">Durdurma seviyesi başlatma seviyesinin üstünde olmalıdır!</string>
     <string name="start_above_stop_error">Başlatma seviyesi durdurma seviyesinin altında olmalıdır!</string>
     <string name="charge_control_footer_summary">Şarj kontrolü, uyarlanabilir şarjı engelleyebilir.</string>
-    <!-- Pixel torch -->
-    <string name="pixel_torch_title">Pixel torch</string>
-    <string name="pixel_torch_summary">Yapılandırılabilir bir el feneri kutucuğu ve ses düğmesi hizmeti</string>
-    <string name="pixel_torch_cycle_modes_title">Döngü modları</string>
-    <string name="pixel_torch_cycle_modes_summary">Önceden tanımlanmış güç seviyeleri arasında geçiş yapın</string>
-    <string name="pixel_torch_state">Durum: %d</string>
-    <string name="pixel_torch_first_click_title">İlk tıklama</string>
-    <string name="pixel_torch_second_click_title">İkinci tıklama</string>
-    <string name="pixel_torch_third_click_title">Üçüncü tıklama</string>
-    <string name="pixel_torch_button_service_title">Ses düğmesi hizmeti</string>
-    <string name="pixel_torch_button_service_summary">Her iki ses seviyesi düğmesine aynı anda basıldığında Pixel torch aç/kapa</string>
-    <string name="pixel_torch_button_service_description">Bu erişilebilirlik hizmeti, Pixel torch\'u açıp kapatmak için önemli olayları, özellikle ses açma ve kısma düğmelerini dinler. Bu hizmet cihazınızdan herhangi bir veri toplamaz.\n\nBu sayfadaki \"Ses Tuşunu Tut\" kısayolunun etkinleştirilmesi, anahtar olayını geçersiz kılacak ve hizmetin çalışmamasına neden olacaktır.\n\nEkran kapalıyken bu hizmet çalışmayacaktır. ses oynatılırken kapalıdır (çıkış cihazından bağımsız olarak).</string>
     <!-- Auto hbm -->
     <string name="auto_hbm_title">Otomatik YPM</string>
     <string name="auto_hbm_main_switch_title">Otomatik HBM kullan</string>

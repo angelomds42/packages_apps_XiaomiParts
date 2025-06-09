@@ -5,9 +5,4 @@
 -->
 <resources>
 
-    <string-array name="unsupported_hbm_devices" translatable="false">
-        <item>tangorpro</item>
-        <item>felix</item>
-    </string-array>
-
 </resources>
