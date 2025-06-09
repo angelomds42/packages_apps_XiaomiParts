@@ -4,13 +4,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# PixelParts app
+# XiaomiParts app
 PRODUCT_PACKAGES += \
-    PixelParts
+    XiaomiParts
 
-# PixelParts init rc
-PRODUCT_PACKAGES += \
-    init.pixelparts.rc
-
-# PixelParts sepolicy
-BOARD_SEPOLICY_DIRS += packages/apps/PixelParts/sepolicy
+# XiaomiParts sepolicy
+BOARD_SEPOLICY_DIRS += packages/apps/XiaomiParts/sepolicy

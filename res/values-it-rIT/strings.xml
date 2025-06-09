@@ -5,8 +5,8 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- PixelParts -->
-    <string name="pixel_parts_title">Pixel Parts</string>
+    <!-- XiaomiParts -->
+    <string name="xiaomi_parts_title">Xiaomi Parts</string>
     <string name="kernel_node_access_error">Accesso al nodo kernel fallito! Assicurati che il percorso fornito per l\'attributo sysfs o procfs sia accurato, che abbia le autorizzazioni appropriate e che le politiche SELinux siano configurate correttamente.</string>
     <string name="kernel_node_returned_value_unknown">Nessuna stringa trovata per il valore restituito dal nodo.</string>
     <string name="tile_add">Aggiungi riquadro</string>
@@ -27,18 +27,6 @@
     <string name="stop_below_start_error">Il livello di arresto deve essere superiore al livello di avvio!</string>
     <string name="start_above_stop_error">Il livello di avvio deve essere inferiore al livello di arresto!</string>
     <string name="charge_control_footer_summary">Il controllo della carica può interferire con la ricarica adattativa.</string>
-    <!-- Pixel torch -->
-    <string name="pixel_torch_title">Torcia pixel</string>
-    <string name="pixel_torch_summary">Un servizio per un riquadro torcia e pulsante volume configurabili</string>
-    <string name="pixel_torch_cycle_modes_title">Modalità ciclo</string>
-    <string name="pixel_torch_cycle_modes_summary">Passa automaticamente tra le intensità impostate</string>
-    <string name="pixel_torch_state">Stato: %d</string>
-    <string name="pixel_torch_first_click_title">Primo click</string>
-    <string name="pixel_torch_second_click_title">Secondo click</string>
-    <string name="pixel_torch_third_click_title">Terzo click</string>
-    <string name="pixel_torch_button_service_title">Servizio pulsante volume</string>
-    <string name="pixel_torch_button_service_summary">Accendi/spegni la torcia pixel premendo entrambi i pulsanti del volume</string>
-    <string name="pixel_torch_button_service_description">Questo servizio di accessibilità percepisce gli eventi chiave, nello specifico i pulsanti volume su e giù, per attivare o disattivare la torcia pixel. Questo servizio non raccoglie alcun dato dal tuo dispositivo.\n\nAbilitare la scorciatoia \"Tieni premuto il tasto volume\" in questa pagina sovrascriverà l\'evento chiave, causando il mancato funzionamento del servizio.\n\nQuesto servizio non funzionerà quando lo schermo è spento e dell\'audio è in riproduzione (indipendentemente dal dispositivo di uscita).</string>
     <!-- Auto hbm -->
     <string name="auto_hbm_title">HBM automatica</string>
     <string name="auto_hbm_main_switch_title">Usa HBM automatica</string>

@@ -13,7 +13,7 @@
         android:layout="@layout/image_preview_layout"
         android:selectable="false" />
 
-    <org.evolution.pixelparts.CustomSeekBarPreference
+    <org.lineageos.settings.CustomSeekBarPreference
         android:key="saturation"
         android:max="200"
         android:min="0"

@@ -5,8 +5,8 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- PixelParts -->
-    <string name="pixel_parts_title">Pixel-részek</string>
+    <!-- XiaomiParts -->
+    <string name="xiaomi_parts_title">Pixel-részek</string>
     <string name="kernel_node_access_error">A kernelhez való hozzáférés nem sikerült!  Győződjön meg arról, hogy a sysf vagy procfs attribútum megadott elérési útja pontos, megfelelő jogosultságokkal rendelkezik, és a SELinux-szabályok megfelelőek.</string>
     <string name="kernel_node_returned_value_unknown">A csomópont-értékhez nincs megfelelő karakterlánc-forrás.</string>
     <string name="tile_add">Csempe-hozzáadás</string>
@@ -27,18 +27,6 @@
     <string name="stop_below_start_error">A megállási szintnek a kezdés szintje felett kell lennie!</string>
     <string name="start_above_stop_error">A kezdési szintnek a leállítási szint alatt kell lennie!</string>
     <string name="charge_control_footer_summary">A töltésvezérlés zavarhatja az adaptív töltést.</string>
-    <!-- Pixel torch -->
-    <string name="pixel_torch_title">Pixel-zseblámpa</string>
-    <string name="pixel_torch_summary">Konfigurálható zseblámpa-csempe és hangerőszabályzó-gomb</string>
-    <string name="pixel_torch_cycle_modes_title">A ciklusok módjai</string>
-    <string name="pixel_torch_cycle_modes_summary">Ciklusok az előre meghatározott erősségi szintek között</string>
-    <string name="pixel_torch_state">%d állapotú</string>
-    <string name="pixel_torch_first_click_title">Első kattintás</string>
-    <string name="pixel_torch_second_click_title">Második kattintás</string>
-    <string name="pixel_torch_third_click_title">Harmadik kattintás</string>
-    <string name="pixel_torch_button_service_title">Hangerőszabályozó-gomb</string>
-    <string name="pixel_torch_button_service_summary">Pixel-zseblámpa kapcsolása, ha egyszerre nyomja meg a két hangerőgombot</string>
-    <string name="pixel_torch_button_service_description">Ez a szolgáltatás figyeli a gombok eseményeit, különösen a hangerő növelése és csökkentése gombokat a Pixel-zseblámpa kapcsolásához. Ez a szolgáltatás nem gyűjt adatokat az Ön készülékéről.\n\nA \"Hangerőgomb nyomvatartása\" billentyűparancs ezen az oldalon történő engedélyezése felülírja a korábbi gombparancsot, így a szolgáltatás nem fog működni.\n\nEz a szolgáltatás nem fog működni, ha a képernyő, hanglejátszás közben ki van kapcsolva (a kimeneti eszköztől függetlenül).</string>
     <!-- Auto hbm -->
     <string name="auto_hbm_title">Automatikus magasfényerő</string>
     <string name="auto_hbm_main_switch_title">Automatikus magasfényerő</string>

@@ -1,31 +1,35 @@
-![example](https://raw.githubusercontent.com/Evolution-XYZ-Devices/packages_apps_PixelParts/udc/readme_resources/PixelParts.png)
-
 ## Current features
 
-| Category | Feature | Description | QS Tile | Required kernel changes |
-| --- | --- | --- | --- | --- |
-| **Display** | `Automatic high brightness mode (HBM)` | Enable peak luminance based on sunlight | Yes | N/A |
-|  | `Saturation` | Control the saturation level of the display | Yes | N/A |
-| **Leds** | `Pixel torch` | Adjust the brightness of the PixelParts flashlight QS-Tile | PixelParts Flashlight QS | N/A |
+| Category | Feature | Description | QS Tile |
+| --- | --- | --- | --- |
+| **Display** | `Automatic high brightness mode (HBM)` | Enable peak luminance based on sunlight | Yes |
+|  | `Saturation` | Control the saturation level of the display | Yes |
 
-## Including PixelParts
+## Including XiaomiParts
 
-- Clone this repository to packages/apps/PixelParts directory in your AOSP build tree:
+- Clone this repository to packages/apps/XiaomiParts directory in your AOSP build tree:
 
 ```
-croot && git clone https://github.com/Evolution-X-Devices/packages_apps_PixelParts packages/apps/PixelParts
+croot && git clone https://github.com/angelomds42/packages_apps_XiaomiParts packages/apps/XiaomiParts
 ```
 
 - Include the app during compilation by adding the following to device-*.mk:
 
-[Commit 1/1 (device tree)](https://github.com/Evolution-X-Devices/device_google_bluejay/commit/6822dabe27de84fb7d52e85cb34d9a71c14d1112)
-
 ```
-# PixelParts
-include packages/apps/PixelParts/device.mk
+# XiaomiParts
+include packages/apps/XiaomiParts/device.mk
 ```
 
-This line includes the [device.mk](https://github.com/Evolution-XYZ-Devices/packages_apps_PixelParts/blob/udc/device.mk) file from the PixelParts repository, which will add the PixelParts application, its initialization script (init.rc), and the necessary security policies (sepolicies) to your AOSP build during compilation.
+This line includes the [device.mk](https://github.com/angelomds42/packages_apps_XiaomiParts/blob/fifteen/device.mk) file from the XiaomiParts repository, which will add the XiaomiParts application and the necessary security policies (sepolicies) to your AOSP build during compilation.
+
+## Overlays
+- Support feature and node paths are defined with overlay:
+
+```
+<!-- Auto hbm -->
+<bool name="config_autoHbmSupported">true</bool>
+<string name="config_autoHbmNode">/sys/...</string>
+```
 
 ## Testing changes
 
@@ -34,13 +38,14 @@ This line includes the [device.mk](https://github.com/Evolution-XYZ-Devices/pack
 Lunch your device and run the following cmd:
 
 ```
-m PixelParts
+m XiaomiParts
 ```
-- This also assumes you are already running an AOSP build including PixelParts as a priv-app in /system_ext.
+- This also assumes you are already running an AOSP build including XiaomiParts as a priv-app in /system_ext.
 
 ## Credits
 
 | Work                                                        | Author                                                                      |
 | ----------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Pixel Parts                                                 | [AnierinBliss](https://github.com/Anierinbliss)                             |
 | CustomSeekBar preference                                    | [Neobuddy89](https://forum.xda-developers.com/m/neobuddy89.3795148/)        |
 | Original AutoHBMService                                     | [Hikari no Tenshi](https://forum.xda-developers.com/m/hikari-no-tenshi.4337348/) & [maxwen](https://forum.xda-developers.com/m/maxwen.4683552/) |

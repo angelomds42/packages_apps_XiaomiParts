@@ -5,8 +5,8 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- PixelParts -->
-    <string name="pixel_parts_title">Ajustes del Pixel</string>
+    <!-- XiaomiParts -->
+    <string name="xiaomi_parts_title">Ajustes del Pixel</string>
     <string name="kernel_node_access_error">¡El acceso al nodo Kernel falló! Por favor, asegúrese de que la ruta proporcionada al atributo sysfs o procfs es exacta, de que tiene los permisos apropiados, y de que las políticas SELinux están correctamente configuradas.</string>
     <string name="kernel_node_returned_value_unknown">No se encontró ningún recurso de cadena para el valor devuelto por el nodo.</string>
     <string name="tile_add">Añadir tarjeta</string>
@@ -27,18 +27,6 @@
     <string name="stop_below_start_error">¡Ajuste final debe estar por encima del ajuste de inicio!</string>
     <string name="start_above_stop_error">¡Ajuste de inicio debe estar por debajo del ajuste final!</string>
     <string name="charge_control_footer_summary">El control de la carga puede interferir con la carga adaptativa.</string>
-    <!-- Pixel torch -->
-    <string name="pixel_torch_title">Linterna Pixel</string>
-    <string name="pixel_torch_summary">Un servicio configurable de tarjeta de linterna y botón de volumen</string>
-    <string name="pixel_torch_cycle_modes_title">Modos de ciclo</string>
-    <string name="pixel_torch_cycle_modes_summary">Ciclo entre niveles de intensidad predefinidos</string>
-    <string name="pixel_torch_state">Estado: %d</string>
-    <string name="pixel_torch_first_click_title">Primer clic</string>
-    <string name="pixel_torch_second_click_title">Segundo clic</string>
-    <string name="pixel_torch_third_click_title">Tercer clic</string>
-    <string name="pixel_torch_button_service_title">Servicio de botón de volumen</string>
-    <string name="pixel_torch_button_service_summary">Alternar la linterna píxel al presionar ambos botones de volumen simultáneamente</string>
-    <string name="pixel_torch_button_service_description">Este servicio de accesibilidad escucha los eventos de teclas, en concreto los botones de subir y bajar volumen, para activar la linterna Pixel. Este servicio no recopila ningún dato de su dispositivo.\n\nhabilitar el acceso directo \"Mantener tecla de volumen\" en esta página anulará el evento clave, haciendo que el servicio no funcione.\n\neste servicio no funcionará cuando la pantalla esté apagada mientras se reproduce audio (independientemente del dispositivo de salida).</string>
     <!-- Auto hbm -->
     <string name="auto_hbm_title">Modo de alto brillo automático</string>
     <string name="auto_hbm_main_switch_title">Usar HBM automático</string>

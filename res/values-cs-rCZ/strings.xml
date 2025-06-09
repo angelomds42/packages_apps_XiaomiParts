@@ -5,8 +5,8 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- PixelParts -->
-    <string name="pixel_parts_title">Pixel součásti</string>
+    <!-- XiaomiParts -->
+    <string name="xiaomi_parts_title">Xiaomi součásti</string>
     <string name="kernel_node_access_error">Přístup k uzlu jádra se nezdařil! Ujistěte se, že poskytnutá cesta k atributu sysfs nebo procfs je přesná, že má odpovídající oprávnění a SELinux zásady jsou správně nastaveny.</string>
     <string name="kernel_node_returned_value_unknown">Pro hodnotu vrácenou uzlem nebyl nalezen žádný zdroj řetězce.</string>
     <string name="tile_add">Přidat dlaždici</string>
@@ -27,18 +27,6 @@
     <string name="stop_below_start_error">Úroveň zastavení musí být nad úrovní startu!</string>
     <string name="start_above_stop_error">Úroveň zastavení musí být nad úrovní startu!</string>
     <string name="charge_control_footer_summary">Řízení nabíjení může bránit adaptivnímu nabíjení.</string>
-    <!-- Pixel torch -->
-    <string name="pixel_torch_title">Pixel svítilna</string>
-    <string name="pixel_torch_summary">Služba konfigurovatelných dlaždic a tlačítek hlasitosti</string>
-    <string name="pixel_torch_cycle_modes_title">Režimy cyklu</string>
-    <string name="pixel_torch_cycle_modes_summary">Cyklus mezi předem stanovenými úrovněmi</string>
-    <string name="pixel_torch_state">Status: %d</string>
-    <string name="pixel_torch_first_click_title">První kliknutí</string>
-    <string name="pixel_torch_second_click_title">Druhé kliknutí</string>
-    <string name="pixel_torch_third_click_title">Třetí kliknutí</string>
-    <string name="pixel_torch_button_service_title">Služba tlačítek hlasitosti</string>
-    <string name="pixel_torch_button_service_summary">Přepnout Pixel svítilnu při současném stisku obou tlačítek hlasitosti</string>
-    <string name="pixel_torch_button_service_description">Tato služba přístupnosti poslouchá události klíče, konkrétně tlačítek hlasitosti nahoru a dolů pro přepnutí Pixel svítilny. Tato služba ze zařízení neshromažďuje žádná data.\n\nPovolení zástupce \"Držet klávesu Hlasitost\" na této stránce přepíše klíčovou událost, což způsobí, že služba nefunguje.\n\nTato služba nebude fungovat, když je obrazovka vypnuta při přehrávání zvuku (bez ohledu na výstupní zařízení).</string>
     <!-- Auto hbm -->
     <string name="auto_hbm_title">Automatické HBM</string>
     <string name="auto_hbm_main_switch_title">Použít automatické HBM</string>
