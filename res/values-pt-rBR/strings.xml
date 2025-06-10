@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- XiaomiParts -->
+    <string name="xiaomi_parts_title">Ajustes da Xiaomi</string>
+    <string name="kernel_node_access_error">Falha no acesso ao nó do kernel! Verifique se o caminho para o atributo sysfs ou procfs está correto, se há permissões apropriadas e se as políticas do SELinux estão configuradas corretamente.</string>
+    <string name="kernel_node_returned_value_unknown">Nenhum recurso de texto encontrado para o valor retornado pelo nó.</string>
+    <string name="tile_add">Adicionar atalho</string>
+    <string name="tile_added">Atalho adicionado</string>
+    <string name="tile_not_added">Atalho não adicionado</string>
+    <string name="tile_already_added">Atalho já adicionado</string>
+    <string name="tile_on">Ativado</string>
+    <string name="tile_off">Desativado</string>
+    <string name="tile_camera_in_use">Câmera em uso</string>
+
+    <!-- High Brightness Mode (HBM) -->
+    <string name="auto_hbm_title">Modo de alto brilho automático</string>
+    <string name="auto_hbm_main_switch_title">Ativar modo de alto brilho automático</string>
+    <string name="auto_hbm_summary">Aumenta automaticamente o brilho da tela em ambientes claros para melhor visibilidade.</string>
+    <string name="auto_hbm_threshold_title">Limite para ativação</string>
+    <string name="auto_hbm_threshold_summary">Defina o quão claro o ambiente precisa estar para ativar o modo de alto brilho.</string>
+    <string name="auto_hbm_enable_time_title">Atraso para ativar</string>
+    <string name="auto_hbm_enable_time_summary">Tempo que o ambiente deve permanecer claro antes de ativar.</string>
+    <string name="auto_hbm_disable_time_title">Atraso para desativar</string>
+    <string name="auto_hbm_disable_time_summary">Tempo que o ambiente deve permanecer escuro antes de desativar.</string>
+
+    <!-- DC Dimming -->
+    <string name="auto_dc_dim_title">Modo Anti-Cintilação Automático</string>
+    <string name="auto_dc_dim_main_switch_title">Usar Modo Anti-Cintilação Automático</string>
+    <string name="auto_dc_dim_summary">Reduz automaticamente o cintilação da tela ativando o DC Dimming quando o brilho está baixo.</string>
+    <string name="auto_dc_dim_threshold_title">Limite de brilho</string>
+    <string name="auto_dc_dim_threshold_summary_brightness">Define o nível de brilho da tela abaixo do qual o Modo Anti-Cintilação será ativado.</string>
+    <string name="current_brightness_title">Brilho atual</string>
+    <string name="auto_dc_dim_enable_time_title">Tempo para ativação</string>
+    <string name="auto_dc_dim_enable_time_summary">Duração em segundos que o brilho deve permanecer abaixo do limite para ativar o modo.</string>
+    <string name="auto_dc_dim_disable_time_title">Tempo para desativação</string>
+    <string name="auto_dc_dim_disable_time_summary">Duração em segundos que o brilho deve permanecer acima do limite para desativar o modo.</string>
+
+    <!-- Saturation -->
+    <string name="saturation_title">Saturação</string>
+    <string name="saturation_summary">Controle o nível de saturação da tela</string>
+    <string name="saturation_footer_summary">Mudar o modo de cor nas configurações de tela substituirá o nível de saturação, exigindo que ele seja reaplicado.</string>
+
+    <!-- Custom seekbar -->
+    <string name="custom_seekbar_value">Valor: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">padrão</string>
+    <string name="custom_seekbar_default_value_to_set">Valor padrão: <xliff:g id="v">%s</xliff:g>\nToque longo para definir</string>
+    <string name="custom_seekbar_default_value_is_set">Valor padrão definido</string>
+
+    <!-- Image preview -->
+    <string name="image_preview_content_description">Pré-visualização</string>
+    <string name="image_preview_next_page_content_description">Próximo</string>
+    <string name="image_preview_previous_page_content_description">Anterior</string>
+</resources>
