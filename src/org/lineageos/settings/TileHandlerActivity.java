@@ -13,10 +13,12 @@
  import android.provider.Settings;
  import android.util.Log;
  
- import org.lineageos.settings.autodcdim.AutoDcDimmingActivity;
- import org.lineageos.settings.autodcdim.AutoDcDimmingTileService;
  import org.lineageos.settings.autohbm.AutoHbmActivity;
  import org.lineageos.settings.autohbm.AutoHbmTileService;
+ import org.lineageos.settings.autodcdim.AutoDcDimmingActivity;
+ import org.lineageos.settings.autodcdim.AutoDcDimmingTileService;
+ import org.lineageos.settings.saturation.SaturationActivity;
+ import org.lineageos.settings.saturation.SaturationTileService;
  
  public final class TileHandlerActivity extends Activity {
      private static final String TAG = "TileHandlerActivity";
@@ -37,6 +39,8 @@
                      aIntent.setClass(this, AutoHbmActivity.class);
                  } else if (qsName.equals(AutoDcDimmingTileService.class.getName())) {
                      aIntent.setClass(this, AutoDcDimmingActivity.class);
+                 } else if (qsName.equals(SaturationTileService.class.getName())) {
+                     aIntent.setClass(this, SaturationActivity.class);
                  } else {
                      aIntent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                      aIntent.setData(Uri.fromParts("package", qsTile.getPackageName(), null));
