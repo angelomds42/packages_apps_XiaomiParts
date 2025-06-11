@@ -7,20 +7,14 @@ package org.lineageos.settings.autohbm;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -32,26 +26,18 @@ import com.android.settingslib.widget.UsageProgressBarPreference;
 import org.lineageos.settings.Constants;
 import org.lineageos.settings.CustomSeekBarPreference;
 import org.lineageos.settings.R;
-import org.lineageos.settings.utils.TileUtils;
 
 public class AutoHbmFragment extends PreferenceFragmentCompat
-        implements OnCheckedChangeListener, SensorEventListener, Preference.OnPreferenceChangeListener {
+        implements CompoundButton.OnCheckedChangeListener, SensorEventListener, Preference.OnPreferenceChangeListener {
 
-    private static final String[] AUTO_HBM_PREFERENCES = {
-            Constants.KEY_AUTO_HBM_THRESHOLD,
-            Constants.KEY_AUTO_HBM_ENABLE_TIME,
-            Constants.KEY_AUTO_HBM_DISABLE_TIME,
-            Constants.KEY_CURRENT_LUX_LEVEL
-    };
-
-    private CustomSeekBarPreference mAutoHbmThresholdPreference;
-    private MainSwitchPreference mAutoHbmSwitch;
+    private MainSwitchPreference mMainSwitch;
+    private CustomSeekBarPreference mThresholdPreference;
+    private UsageProgressBarPreference mCurrentLuxLevelPreference;
+    private CustomSeekBarPreference mEnableTimePreference;
+    private CustomSeekBarPreference mDisableTimePreference;
     private SensorManager mSensorManager;
     private Sensor mLightSensor;
-    private UsageProgressBarPreference mCurrentLuxLevelPreference;
     private int mCurrentLux;
-
-    private static boolean mAutoHbmServiceEnabled = false;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -59,47 +45,30 @@ public class AutoHbmFragment extends PreferenceFragmentCompat
         setHasOptionsMenu(true);
 
         Context context = getContext();
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        mAutoHbmSwitch = findPreference(Constants.KEY_AUTO_HBM);
-        mAutoHbmSwitch.setChecked(sharedPrefs.getBoolean(Constants.KEY_AUTO_HBM, false));
-        mAutoHbmSwitch.addOnSwitchChangeListener(this);
+        mMainSwitch = findPreference(Constants.KEY_AUTO_HBM);
+        mMainSwitch.setChecked(sharedPrefs.getBoolean(Constants.KEY_AUTO_HBM, false));
+        mMainSwitch.addOnSwitchChangeListener(this);
 
-        mAutoHbmThresholdPreference = findPreference(Constants.KEY_AUTO_HBM_THRESHOLD);
-        mAutoHbmThresholdPreference.setOnPreferenceChangeListener(this);
+        mThresholdPreference = findPreference(Constants.KEY_AUTO_HBM_THRESHOLD);
+        mThresholdPreference.setOnPreferenceChangeListener(this);
+
+        mEnableTimePreference = findPreference(Constants.KEY_AUTO_HBM_ENABLE_TIME);
+        mDisableTimePreference = findPreference(Constants.KEY_AUTO_HBM_DISABLE_TIME);
 
         mCurrentLuxLevelPreference = findPreference(Constants.KEY_CURRENT_LUX_LEVEL);
 
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         mLightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-
-        toggleAutoHbmPreferencesVisibility(mAutoHbmSwitch.isChecked());
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.auto_hbm_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.add_tile) {
-            TileUtils.requestAddTileService(
-                    getContext(),
-                    AutoHbmTileService.class,
-                    R.string.auto_hbm_title,
-                    R.drawable.ic_auto_hbm_tile
-            );
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
+ 
+        togglePreferencesVisibility(mMainSwitch.isChecked());
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mAutoHbmSwitch.isChecked()) {
+        if (mMainSwitch.isChecked()) {
             mSensorManager.registerListener(this, mLightSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
     }
@@ -107,28 +76,29 @@ public class AutoHbmFragment extends PreferenceFragmentCompat
     @Override
     public void onPause() {
         super.onPause();
-        if (mAutoHbmSwitch.isChecked()) {
-            mSensorManager.unregisterListener(this);
-        }
+        mSensorManager.unregisterListener(this);
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         sharedPrefs.edit().putBoolean(Constants.KEY_AUTO_HBM, isChecked).apply();
-        toggleAutoHbmService(getContext());
-        toggleAutoHbmPreferencesVisibility(isChecked);
 
+        Intent intent = new Intent(getContext(), AutoHbmService.class);
         if (isChecked) {
+            getContext().startServiceAsUser(intent, UserHandle.CURRENT);
             mSensorManager.registerListener(this, mLightSensor, SensorManager.SENSOR_DELAY_NORMAL);
         } else {
+            getContext().stopServiceAsUser(intent, UserHandle.CURRENT);
             mSensorManager.unregisterListener(this);
         }
+
+        togglePreferencesVisibility(isChecked);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mAutoHbmThresholdPreference && mCurrentLuxLevelPreference != null) {
+        if (preference == mThresholdPreference && mCurrentLuxLevelPreference != null) {
             int threshold = (int) newValue;
             updateCurrentLuxLevelPreference(mCurrentLux, threshold);
             return true;
@@ -138,68 +108,40 @@ public class AutoHbmFragment extends PreferenceFragmentCompat
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        if (event.sensor.getType() == Sensor.TYPE_LIGHT && mCurrentLuxLevelPreference != null) {
-            float luxValue = event.values[0];
-            mCurrentLux = (int) luxValue;
-            int threshold = sharedPrefs.getInt(Constants.KEY_AUTO_HBM_THRESHOLD, 20000);
+        if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+            mCurrentLux = (int) event.values[0];
+            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+            int threshold = sharedPrefs.getInt(Constants.KEY_AUTO_HBM_THRESHOLD, Constants.DEFAULT_AUTO_HBM_THRESHOLD);
             updateCurrentLuxLevelPreference(mCurrentLux, threshold);
         }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Do nothing
     }
 
     private void updateCurrentLuxLevelPreference(int currentLux, int threshold) {
         if (mCurrentLuxLevelPreference != null) {
             mCurrentLuxLevelPreference.setUsageSummary(String.valueOf(currentLux));
             mCurrentLuxLevelPreference.setTotalSummary(String.valueOf(threshold));
-
-            if (currentLux >= threshold) {
-                mCurrentLuxLevelPreference.setPercent(100, 100);
-            } else {
-                mCurrentLuxLevelPreference.setPercent(currentLux, threshold);
-            }
+            mCurrentLuxLevelPreference.setPercent(getLuxProgressPercentage(currentLux, threshold),100);
         }
     }
 
-    private void toggleAutoHbmPreferencesVisibility(boolean show) {
-        for (String prefKey : AUTO_HBM_PREFERENCES) {
-            Preference pref = findPreference(prefKey);
-            if (pref != null) {
-                pref.setVisible(show);
-            }
-        }
+    private void togglePreferencesVisibility(boolean show) {
+        if (mCurrentLuxLevelPreference != null) mCurrentLuxLevelPreference.setVisible(show);
+        if (mThresholdPreference != null) mThresholdPreference.setVisible(show);
+        if (mEnableTimePreference != null) mEnableTimePreference.setVisible(show);
+        if (mDisableTimePreference != null) mDisableTimePreference.setVisible(show);
     }
 
-    public static void toggleAutoHbmService(Context context) {
-        if (isHbmSupported(context)) {
-            boolean isAutoHbmEnabled = PreferenceManager.getDefaultSharedPreferences(context)
-                    .getBoolean(Constants.KEY_AUTO_HBM, false);
-
-            if (isAutoHbmEnabled && !mAutoHbmServiceEnabled) {
-                startAutoHbmService(context);
-            } else if (!isAutoHbmEnabled && mAutoHbmServiceEnabled) {
-                stopAutoHbmService(context);
-            }
-        }
-    }
-
-    private static void startAutoHbmService(Context context) {
-        context.startServiceAsUser(new Intent(context, AutoHbmService.class),
-                UserHandle.CURRENT);
-        mAutoHbmServiceEnabled = true;
-    }
-
-    private static void stopAutoHbmService(Context context) {
-        mAutoHbmServiceEnabled = false;
-        context.stopServiceAsUser(new Intent(context, AutoHbmService.class),
-                UserHandle.CURRENT);
+    private int getLuxProgressPercentage(int currentLux, int threshold) {
+        if (currentLux >= threshold) return 100;
+        if (threshold <= 0) return 0;
+        return (int) (((float) currentLux / threshold) * 100);
     }
 
     public static boolean isHbmSupported(Context context) {
-    return context.getResources().getBoolean(R.bool.config_autoHbmSupported);
+        return context.getResources().getBoolean(R.bool.config_autoHbmSupported);
     }
 }
