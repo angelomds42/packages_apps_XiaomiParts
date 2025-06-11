@@ -20,6 +20,7 @@ public class Constants {
     public static String getHbmNode(Context context) {
         return context.getResources().getString(R.string.config_autoHbmNode);
     }
+    public static final int DEFAULT_AUTO_HBM_THRESHOLD = 20000;
 
     // Saturation
     public static final String KEY_SATURATION = "saturation";
