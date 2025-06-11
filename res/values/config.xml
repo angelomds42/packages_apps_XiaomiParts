@@ -5,4 +5,8 @@
     <bool name="config_autoHbmSupported">true</bool>
     <string name="config_autoHbmNode">/sys/devices/platform/soc/soc:qcom,dsi-display-primary/hbm</string>
 
+    <!-- Auto DC Dimming -->
+    <bool name="config_autoDcDimmingSupported">true</bool>
+    <string name="config_autoDcDimmingNode">/sys/class/backlight/panel0-backlight/dim</string>
+
 </resources>

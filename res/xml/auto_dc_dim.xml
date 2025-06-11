@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="dc_dim_intro"
+        android:title="@string/auto_dc_dim_summary" />
+
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="auto_dc_dim"
+        android:title="@string/auto_dc_dim_main_switch_title"
+        android:defaultValue="false" />
+
+    <com.android.settingslib.widget.UsageProgressBarPreference
+        android:key="current_brightness_level" 
+        android:title="@string/current_brightness_title"
+        android:selectable="false" />
+
+    <org.lineageos.settings.CustomSeekBarPreference
+        android:key="auto_dc_dim_threshold"
+        android:title="@string/auto_dc_dim_threshold_title"
+        android:summary="@string/auto_dc_dim_threshold_summary_brightness"
+        android:max="255"
+        android:min="1"
+        settings:units=""
+        android:defaultValue="50" />
+
+    <org.lineageos.settings.CustomSeekBarPreference
+        android:key="auto_dc_dim_enable_time"
+        android:title="@string/auto_dc_dim_enable_time_title"
+        android:summary="@string/auto_dc_dim_enable_time_summary"
+        android:max="10"
+        android:min="0"
+        settings:units="s"
+        android:defaultValue="0" />
+
+    <org.lineageos.settings.CustomSeekBarPreference
+        android:key="auto_dc_dim_disable_time"
+        android:title="@string/auto_dc_dim_disable_time_title"
+        android:summary="@string/auto_dc_dim_disable_time_summary"
+        android:max="10"
+        android:min="0"
+        settings:units="s"
+        android:defaultValue="1" />
+</PreferenceScreen>

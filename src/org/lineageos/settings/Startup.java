@@ -9,6 +9,10 @@
  import android.content.Context;
  import android.content.Intent;
  
+ import org.lineageos.settings.autodcdim.AutoDcDimmingActivity;
+ import org.lineageos.settings.autodcdim.AutoDcDimmingFragment;
+ import org.lineageos.settings.autodcdim.AutoDcDimmingService;
+ import org.lineageos.settings.autodcdim.AutoDcDimmingTileService;
  import org.lineageos.settings.autohbm.AutoHbmActivity;
  import org.lineageos.settings.autohbm.AutoHbmFragment;
  import org.lineageos.settings.autohbm.AutoHbmService;
@@ -30,6 +34,15 @@
          ComponentUtils.toggleComponent(context, AutoHbmActivity.class, AutoHbmFragment.isHbmSupported(context));
          ComponentUtils.toggleComponent(context, AutoHbmTileService.class, AutoHbmFragment.isHbmSupported(context));
 
+         // Auto DC Dimming
+         ComponentUtils.toggleService(context,
+                 AutoDcDimmingFragment.isDcDimmingSupported(context),
+                 Constants.KEY_AUTO_DC_DIMMING,
+                 AutoDcDimmingService.class);
+         
+         ComponentUtils.toggleComponent(context, AutoDcDimmingActivity.class, AutoDcDimmingFragment.isDcDimmingSupported(context));
+         ComponentUtils.toggleComponent(context, AutoDcDimmingTileService.class, AutoDcDimmingFragment.isDcDimmingSupported(context));
+ 
          // Saturation
          SaturationFragment saturationFragment = new SaturationFragment();
          saturationFragment.restoreSaturationSetting(context);
