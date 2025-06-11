@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
+import org.lineageos.settings.autodcdim.AutoDcDimmingActivity;
+import org.lineageos.settings.autodcdim.AutoDcDimmingTileService;
 import org.lineageos.settings.autohbm.AutoHbmActivity;
 import org.lineageos.settings.autohbm.AutoHbmTileService;
 
@@ -26,13 +28,14 @@ public final class TileHandlerActivity extends Activity {
         final Intent intent = getIntent();
         try {
             if (android.service.quicksettings.TileService.ACTION_QS_TILE_PREFERENCES.equals(intent.getAction())) {
-                final ComponentName qsTile =
-                        intent.getParcelableExtra(Intent.EXTRA_COMPONENT_NAME);
+                final ComponentName qsTile = intent.getParcelableExtra(Intent.EXTRA_COMPONENT_NAME);
                 final String qsName = qsTile.getClassName();
                 final Intent aIntent = new Intent();
 
                 if (qsName.equals(AutoHbmTileService.class.getName())) {
                     aIntent.setClass(this, AutoHbmActivity.class);
+                } else if (qsName.equals(AutoDcDimmingTileService.class.getName())) {
+                    aIntent.setClass(this, AutoDcDimmingActivity.class);
                 } else {
                     aIntent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     aIntent.setData(Uri.fromParts("package", qsTile.getPackageName(), null));

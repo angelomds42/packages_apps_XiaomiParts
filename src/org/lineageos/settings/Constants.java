@@ -22,6 +22,19 @@ public class Constants {
     }
     public static final int DEFAULT_AUTO_HBM_THRESHOLD = 20000;
 
+    // AutoDCDimming
+    public static final String KEY_AUTO_DC_DIMMING = "auto_dc_dim";
+    public static final String KEY_AUTO_DC_DIMMING_THRESHOLD = "auto_dc_dim_threshold";
+    public static final String KEY_AUTO_DC_DIMMING_ENABLE_TIME = "auto_dc_dim_enable_time";
+    public static final String KEY_AUTO_DC_DIMMING_DISABLE_TIME = "auto_dc_dim_disable_time";
+    public static String getDcDimmingNode(Context context) {
+        return context.getResources().getString(R.string.config_autoDcDimmingNode);
+    }
+    public static final int DEFAULT_AUTO_DC_DIMMING_THRESHOLD = 50;
+
+    // Brightness
+    public static final String KEY_CURRENT_BRIGHTNESS_LEVEL = "current_brightness_level";
+
     // Saturation
     public static final String KEY_SATURATION = "saturation";
     public static final String KEY_SATURATION_PREVIEW = "saturation_preview";

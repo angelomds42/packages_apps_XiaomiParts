@@ -29,6 +29,18 @@
     <string name="auto_hbm_disable_time_title">Disable time</string>
     <string name="auto_hbm_disable_time_summary">Duration in seconds for which HBM is deactivated if the light threshold falls below the set level</string>
 
+    <!-- Dc Dimming --> 
+    <string name="auto_dc_dim_title">Automatic Anti-Flicker Mode</string>
+    <string name="auto_dc_dim_main_switch_title">Use Automatic Anti-Flicker Mode</string>
+    <string name="auto_dc_dim_summary">Automatically reduces screen flicker by activating DC Dimming when the screen brightness is low.</string>
+    <string name="auto_dc_dim_threshold_title">Brightness threshold</string>
+    <string name="auto_dc_dim_threshold_summary_brightness">Set the screen brightness level below which Anti-Flicker Mode will be activated.</string>
+    <string name="current_brightness_title">Current brightness</string>
+    <string name="auto_dc_dim_enable_time_title">Activation delay</string>
+    <string name="auto_dc_dim_enable_time_summary">Duration in seconds the brightness must remain below the threshold to activate the mode.</string>
+    <string name="auto_dc_dim_disable_time_title">Deactivation delay</string>
+    <string name="auto_dc_dim_disable_time_summary">Duration in seconds the brightness must remain above the threshold to deactivate the mode.</string>
+
     <!-- Saturation -->
     <string name="saturation_title">Saturation</string>
     <string name="saturation_summary">Control the saturation level of the display</string>

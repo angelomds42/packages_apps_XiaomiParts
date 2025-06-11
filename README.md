@@ -3,6 +3,7 @@
 | Category | Feature | Description | QS Tile |
 | --- | --- | --- | --- |
 | **Display** | `Automatic high brightness mode (HBM)` | Enable peak luminance based on sunlight | Yes |
+|  | `Automatic DC Dimming` | Enable anti-flicker mode based on screen brightness | Yes |
 |  | `Saturation` | Control the saturation level of the display | Yes |
 
 ## Including XiaomiParts
@@ -29,6 +30,9 @@ This line includes the [device.mk](https://github.com/angelomds42/packages_apps_
 <!-- Auto hbm -->
 <bool name="config_autoHbmSupported">true</bool>
 <string name="config_autoHbmNode">/sys/...</string>
+<!-- Auto dc dim -->
+<bool name="config_autoDcDimmingSupported">true</bool>
+<string name="config_autoDcDimmingNode">/sys/...</string>
 ```
 
 ## Testing changes
