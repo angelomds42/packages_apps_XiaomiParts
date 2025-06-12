@@ -5,4 +5,14 @@
 -->
 <resources>
 
+     <string-array name="thermal_profile_entries">
+        <item>@string/thermal_profile_default</item>
+        <item>@string/thermal_profile_benchmark</item>
+        <item>@string/thermal_profile_browser</item>
+        <item>@string/thermal_profile_camera</item>
+        <item>@string/thermal_profile_dialer</item>
+        <item>@string/thermal_profile_gaming</item>
+        <item>@string/thermal_profile_streaming</item>
+     </string-array>
+
 </resources>

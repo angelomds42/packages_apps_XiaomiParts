@@ -38,6 +38,14 @@ public class Constants {
     // Brightness
     public static final String KEY_CURRENT_BRIGHTNESS_LEVEL = "current_brightness_level";
 
+    // Thermal
+    public static final String KEY_THERMAL_MAIN_SWITCH = "thermal_main_switch";
+    public static final String THERMAL_PREF_KEY_PREFIX = "thermal_profile_";
+    public static final String THERMAL_DEFAULT_PROFILE_VALUE = "0";
+    public static boolean isThermalSupported(Context context) {
+        return context.getResources().getBoolean(R.bool.config_thermalSupported);
+    }
+
     // Saturation
     public static final String KEY_SATURATION = "saturation";
     public static final String KEY_SATURATION_PREVIEW = "saturation_preview";
