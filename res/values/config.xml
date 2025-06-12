@@ -12,4 +12,17 @@
     <bool name="config_autoDcDimmingSupported">false</bool>
     <integer name="config_autoDcDimmingThreshold">10</integer>
 
+    <!-- Thermal -->
+    <bool name="config_thermalSupported">true</bool>
+    <string-array name="thermal_profile_values" translatable="false">
+        <item>0</item>   <!-- @string/thermal_profile_default -->
+        <item>10</item>  <!-- @string/thermal_profile_benchmark -->
+        <item>11</item>  <!-- @string/thermal_profile_browser -->
+        <item>12</item>  <!-- @string/thermal_profile_camera -->
+        <item>8</item>   <!-- @string/thermal_profile_dialer -->
+        <item>9</item>   <!-- @string/thermal_profile_gaming -->
+        <item>14</item>  <!-- @string/thermal_profile_streaming -->
+    </string-array>
+    <string name="config_thermalNode" translatable="false">/sys/class/thermal/thermal_message/sconfig</string>
+
 </resources>

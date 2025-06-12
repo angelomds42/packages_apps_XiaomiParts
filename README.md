@@ -6,6 +6,8 @@
 |  | `Automatic DC Dimming` | Enable anti-flicker mode based on screen brightness | Yes |
 |  | `Saturation` | Control the saturation level of the display | Yes |
 | **Sound** | `Clear speaker` | Plays a 30-second audio to clear the speaker | No |
+| **Battery** | `Dynamic thermal profiles` | Optimize thermal management by setting specific profiles for each app | No |
+
 
 
 ## Including XiaomiParts
@@ -25,17 +27,10 @@ include packages/apps/XiaomiParts/device.mk
 
 This line includes the [device.mk](https://github.com/angelomds42/packages_apps_XiaomiParts/blob/fifteen/device.mk) file from the XiaomiParts repository, which will add the XiaomiParts application and the necessary security policies (sepolicies) to your AOSP build during compilation.
 
-## Overlays
-- Support feature and node paths are defined with overlay:
+# Overlay configs
+All feature flags and device-specific paths are configured via resource overlays. This method enables you to tailor the app for your hardware by enabling/disabling features and setting correct paths without modifying the base source code.
 
-```
-<!-- Auto hbm -->
-<bool name="config_autoHbmSupported">true</bool>
-<string name="config_autoHbmNode">/sys/...</string>
-<!-- Auto dc dim -->
-<bool name="config_autoDcDimmingSupported">true</bool>
-<string name="config_autoDcDimmingNode">/sys/...</string>
-```
+Refer to the base [config.xml](https://github.com/angelomds42/packages_apps_XiaomiParts/blob/fifteen/res/values/config.xml) as a reference for your implementation.
 
 ## Testing changes
 

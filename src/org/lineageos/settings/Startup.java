@@ -18,7 +18,10 @@
  import org.lineageos.settings.autohbm.AutoHbmService;
  import org.lineageos.settings.autohbm.AutoHbmTileService;
  import org.lineageos.settings.saturation.SaturationFragment;
- import org.lineageos.settings.utils.ComponentUtils;
+import org.lineageos.settings.thermal.ThermalActivity;
+import org.lineageos.settings.thermal.ThermalService;
+import org.lineageos.settings.thermal.ThermalUtils;
+import org.lineageos.settings.utils.ComponentUtils;
  
  public class Startup extends BroadcastReceiver {
  
@@ -42,6 +45,13 @@
          
          ComponentUtils.toggleComponent(context, AutoDcDimmingActivity.class, AutoDcDimmingFragment.isDcDimmingSupported(context));
          ComponentUtils.toggleComponent(context, AutoDcDimmingTileService.class, AutoDcDimmingFragment.isDcDimmingSupported(context));
+
+       // Thermal
+        ComponentUtils.toggleService(context,
+                ThermalUtils.isThermalSupported(context),
+                Constants.KEY_THERMAL_MAIN_SWITCH,
+                ThermalService.class);
+        ComponentUtils.toggleComponent(context, ThermalActivity.class, ThermalUtils.isThermalSupported(context));
  
          // Saturation
          SaturationFragment saturationFragment = new SaturationFragment();

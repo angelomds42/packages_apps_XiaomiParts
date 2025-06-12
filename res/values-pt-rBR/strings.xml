@@ -61,4 +61,19 @@
     <!-- Clear Speaker -->
     <string name="clear_speaker_title">Limpar alto-falante</string>
     <string name="clear_speaker_summary">Executa um áudio de 30 segundos para limpar o alto-falante. Se o alto-falante estiver levemente obstruído, execute esta função de uma a duas vezes.</string>
+
+    <!-- Thermal Profiles -->
+    <string name="thermal_title">Perfis térmicos dinâmicos</string>
+    <string name="thermal_summary">Otimize o gerenciamento térmico definindo perfis específicos para cada app, como jogos ou streaming.</string>
+    <string name="thermal_main_switch_title">Usar perfis térmicos dinâmicos</string>
+    <string name="thermal_per_app_profile_title">Perfis por App</string>
+    <string name="thermal_profile_default">Padrão</string>
+    <string name="thermal_profile_benchmark">Benchmark</string>
+    <string name="thermal_profile_browser">Navegador</string>
+    <string name="thermal_profile_camera">Câmera</string>
+    <string name="thermal_profile_dialer">Discador</string>
+    <string name="thermal_profile_gaming">Jogos</string>
+    <string name="thermal_profile_streaming">Streaming</string>
+    <string name="thermal_auto_selection_title">Modo de Seleção Automática</string>
+    <string name="thermal_auto_selection_summary">Permite que o sistema escolha o melhor perfil térmico para o aplicativo em uso.</string>
 </resources>

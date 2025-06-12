@@ -31,10 +31,12 @@ allow devicesettings_app system_data_file:dir search;
 
 allow devicesettings_app {
   sysfs_leds
+  sysfs_thermal
 }:file rw_file_perms;
 
 allow devicesettings_app {
   sysfs_leds
+  sysfs_thermal
 }:dir r_dir_perms;
 
 allow devicesettings_app vendor_sysfs_graphics:dir search;

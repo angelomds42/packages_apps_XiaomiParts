@@ -61,4 +61,19 @@
     <!-- Clear Speaker -->
     <string name="clear_speaker_title">Clear speaker</string>
     <string name="clear_speaker_summary">Plays a 30-second audio to clear the speaker. If the speaker is lightly blocked, run this feature once or twice.</string>
+
+    <!-- Thermal Profiles -->
+    <string name="thermal_title">Dynamic thermal profiles</string>
+    <string name="thermal_summary">Optimize thermal management by setting specific profiles for each app, like gaming or streaming.</string>
+    <string name="thermal_main_switch_title">Use dynamic thermal profiles</string>
+    <string name="thermal_per_app_profile_title">Per-App Profiles</string>
+    <string name="thermal_profile_default">Default</string>
+    <string name="thermal_profile_benchmark">Benchmark</string>
+    <string name="thermal_profile_browser">Browser</string>
+    <string name="thermal_profile_camera">Camera</string>
+    <string name="thermal_profile_dialer">Dialer</string>
+    <string name="thermal_profile_gaming">Gaming</string>
+    <string name="thermal_profile_streaming">Streaming</string>
+    <string name="thermal_auto_selection_title">Automatic Selection Mode</string>
+    <string name="thermal_auto_selection_summary">Allows the system to choose the best thermal profile for the application in use.</string>
 </resources>
