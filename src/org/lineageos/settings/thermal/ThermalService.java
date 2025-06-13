@@ -3,6 +3,8 @@
 
 package org.lineageos.settings.thermal;
 
+import org.lineageos.settings.Constants;
+
 import android.app.ActivityTaskManager;
 import android.app.ActivityTaskManager.RootTaskInfo;
 import android.app.IActivityTaskManager;
@@ -12,11 +14,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
+
+import androidx.preference.PreferenceManager;
 
 public class ThermalService extends Service {
 
@@ -24,6 +29,7 @@ public class ThermalService extends Service {
 
     private String mPreviousApp;
     private ThermalUtils mThermalUtils;
+    private SharedPreferences mSharedPrefs;
 
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private IActivityTaskManager mActivityTaskManager;
@@ -53,7 +59,8 @@ public class ThermalService extends Service {
     public void onCreate() {
         super.onCreate();
         mThermalUtils = new ThermalUtils(this);
-        
+        mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_SCREEN_ON);
@@ -107,7 +114,13 @@ public class ThermalService extends Service {
             }
             String foregroundApp = focusedTask.topActivity.getPackageName();
             if (!foregroundApp.equals(mPreviousApp)) {
-                mThermalUtils.setThermalProfile(foregroundApp);
+                boolean isAutoSelectionMode = mSharedPrefs.getBoolean(Constants.KEY_THERMAL_AUTO_SELECTION, false);
+
+                if (isAutoSelectionMode) {
+                    mThermalUtils.setAutoThermalProfile(foregroundApp);
+                } else {
+                    mThermalUtils.setThermalProfile(foregroundApp);
+                }
                 mPreviousApp = foregroundApp;
             }
         } catch (Exception e) {

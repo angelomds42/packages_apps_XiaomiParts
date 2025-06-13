@@ -8,6 +8,8 @@ package org.lineageos.settings.thermal;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.UserHandle;
 
 import androidx.preference.PreferenceManager;
@@ -28,6 +30,35 @@ public final class ThermalUtils {
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         mThermalProfileValues = context.getResources().getStringArray(R.array.thermal_profile_values);
         mThermalNode = context.getResources().getString(R.string.config_thermalNode);
+    }
+
+    public void setAutoThermalProfile(String packageName) {
+        String profileValue = getProfileForPackageCategory(packageName);
+        FileUtils.writeValue(mThermalNode, profileValue);
+    }
+
+    private String getProfileForPackageCategory(String packageName) {
+        try {
+            PackageManager pm = mContext.getPackageManager();
+            ApplicationInfo appInfo = pm.getApplicationInfo(packageName, 0);
+
+            switch (appInfo.category) {
+                case ApplicationInfo.CATEGORY_GAME:
+                    return mThermalProfileValues[5];
+
+                case ApplicationInfo.CATEGORY_VIDEO:
+                case ApplicationInfo.CATEGORY_AUDIO:
+                    return mThermalProfileValues[6];
+
+                default:
+                    if (packageName.contains("browser") || packageName.contains("chrome") || packageName.contains("firefox")) {
+                        return mThermalProfileValues[2];
+                    }
+                    return mThermalProfileValues[0];
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return mThermalProfileValues[0];
+        }
     }
 
     public static boolean isThermalSupported(Context context) {

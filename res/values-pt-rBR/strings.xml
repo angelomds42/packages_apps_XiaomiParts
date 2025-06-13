@@ -68,4 +68,6 @@
     <string name="thermal_profile_dialer">Discador</string>
     <string name="thermal_profile_gaming">Jogos</string>
     <string name="thermal_profile_streaming">Streaming</string>
+    <string name="thermal_auto_selection_title">Modo de Seleção Automática</string>
+    <string name="thermal_auto_selection_summary">Permite que o sistema escolha o melhor perfil térmico para o aplicativo em uso.</string>
 </resources>

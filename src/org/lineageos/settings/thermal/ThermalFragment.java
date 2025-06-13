@@ -21,6 +21,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settingslib.widget.MainSwitchPreference;
 import org.lineageos.settings.Constants;
@@ -30,17 +31,18 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
- 
+
 public class ThermalFragment extends PreferenceFragmentCompat
         implements CompoundButton.OnCheckedChangeListener {
 
     private static final String KEY_PER_APP_CATEGORY = "per_app_profile_category";
 
+    private SwitchPreferenceCompat mAutoSelectionSwitch;
     private MainSwitchPreference mMainSwitch;
     private PreferenceCategory mPerAppCategory;
     private SharedPreferences mSharedPrefs;
     private String[] mProfileValues;
- 
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.thermal, rootKey);
@@ -54,6 +56,18 @@ public class ThermalFragment extends PreferenceFragmentCompat
         mMainSwitch.addOnSwitchChangeListener(this);
 
         mPerAppCategory = findPreference(KEY_PER_APP_CATEGORY);
+
+        mAutoSelectionSwitch = findPreference("thermal_auto_selection_switch");
+        mAutoSelectionSwitch.setChecked(mSharedPrefs.getBoolean("thermal_auto_selection_switch", false));
+        mAutoSelectionSwitch.setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean isEnabled = (Boolean) newValue;
+            mSharedPrefs.edit().putBoolean("thermal_auto_selection_switch", isEnabled).apply();
+            mPerAppCategory.setVisible(!isEnabled);
+            return true;
+        });
+
+        boolean isAutoSelectionEnabled = mSharedPrefs.getBoolean("thermal_auto_selection_switch", false);
+        mPerAppCategory.setVisible(!isAutoSelectionEnabled);
 
         new LoadAppsTask(this).execute();
     }

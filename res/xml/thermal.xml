@@ -12,6 +12,13 @@
         android:title="@string/thermal_main_switch_title"
         android:defaultValue="false" />
 
+    <androidx.preference.SwitchPreferenceCompat
+        android:key="thermal_auto_selection_switch"
+        android:title="@string/thermal_auto_selection_title"
+        android:summary="@string/thermal_auto_selection_summary"
+        android:defaultValue="false"
+        android:dependency="thermal_main_switch" />
+
     <PreferenceCategory
         android:key="per_app_profile_category"
         android:title="@string/thermal_per_app_profile_title"

@@ -42,6 +42,7 @@ public class Constants {
     public static final String KEY_THERMAL_MAIN_SWITCH = "thermal_main_switch";
     public static final String THERMAL_PREF_KEY_PREFIX = "thermal_profile_";
     public static final String THERMAL_DEFAULT_PROFILE_VALUE = "0";
+    public static final String KEY_THERMAL_AUTO_SELECTION = "thermal_auto_selection_switch";
     public static boolean isThermalSupported(Context context) {
         return context.getResources().getBoolean(R.bool.config_thermalSupported);
     }

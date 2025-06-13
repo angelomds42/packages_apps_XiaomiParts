@@ -73,4 +73,6 @@
     <string name="thermal_profile_dialer">Dialer</string>
     <string name="thermal_profile_gaming">Gaming</string>
     <string name="thermal_profile_streaming">Streaming</string>
+    <string name="thermal_auto_selection_title">Automatic Selection Mode</string>
+    <string name="thermal_auto_selection_summary">Allows the system to choose the best thermal profile for the application in use.</string>
 </resources>
