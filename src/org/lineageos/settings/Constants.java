@@ -13,24 +13,33 @@ public class Constants {
 
     // AutoHbm
     public static final String KEY_AUTO_HBM = "auto_hbm";
-    public static final String KEY_AUTO_HBM_THRESHOLD = "auto_hbm_threshold";
-    public static final String KEY_AUTO_HBM_ENABLE_TIME = "auto_hbm_enable_time";
-    public static final String KEY_AUTO_HBM_DISABLE_TIME = "auto_hbm_disable_time";
+    public static final String KEY_AUTO_HBM_ACTIVATION_THRESHOLD = "auto_hbm_activation_threshold";
+    public static final String KEY_AUTO_HBM_DEACTIVATION_THRESHOLD = "auto_hbm_deactivation_threshold";
     public static final String KEY_CURRENT_LUX_LEVEL = "current_lux_level";
+
     public static String getHbmNode(Context context) {
         return context.getResources().getString(R.string.config_autoHbmNode);
     }
-    public static final int DEFAULT_AUTO_HBM_THRESHOLD = 20000;
+
+    public static int getHbmActivationThresholdDefault(Context context) {
+        return context.getResources().getInteger(R.integer.config_autoHbmActivationThreshold);
+    }
+
+    public static int getHbmDeactivationThresholdDefault(Context context) {
+        return context.getResources().getInteger(R.integer.config_autoHbmDeactivationThreshold);
+    }
 
     // AutoDCDimming
     public static final String KEY_AUTO_DC_DIMMING = "auto_dc_dim";
     public static final String KEY_AUTO_DC_DIMMING_THRESHOLD = "auto_dc_dim_threshold";
-    public static final String KEY_AUTO_DC_DIMMING_ENABLE_TIME = "auto_dc_dim_enable_time";
-    public static final String KEY_AUTO_DC_DIMMING_DISABLE_TIME = "auto_dc_dim_disable_time";
+
     public static String getDcDimmingNode(Context context) {
         return context.getResources().getString(R.string.config_autoDcDimmingNode);
     }
-    public static final int DEFAULT_AUTO_DC_DIMMING_THRESHOLD = 50;
+
+    public static int getDcDimmingThresholdDefault(Context context) {
+        return context.getResources().getInteger(R.integer.config_autoDcDimmingThreshold);
+    }
 
     // Clear Speaker
     public static final String KEY_CLEAR_SPEAKER = "clear_speaker_pref";
@@ -43,6 +52,7 @@ public class Constants {
     public static final String THERMAL_PREF_KEY_PREFIX = "thermal_profile_";
     public static final String THERMAL_DEFAULT_PROFILE_VALUE = "0";
     public static final String KEY_THERMAL_AUTO_SELECTION = "thermal_auto_selection_switch";
+
     public static boolean isThermalSupported(Context context) {
         return context.getResources().getBoolean(R.bool.config_thermalSupported);
     }

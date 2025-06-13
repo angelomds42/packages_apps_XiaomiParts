@@ -22,6 +22,8 @@ import org.lineageos.settings.utils.FileUtils;
 
 public class AutoDcDimmingService extends Service {
 
+    private static final int DC_TRANSITION_DELAY_MS = 200;
+
     private Handler mHandler;
     private SharedPreferences mSharedPrefs;
     private BrightnessObserver mBrightnessObserver;
@@ -31,10 +33,6 @@ public class AutoDcDimmingService extends Service {
 
     private String getNodePath() {
         return Constants.getDcDimmingNode(this);
-    }
-
-    private boolean shouldBeActive(int brightness, int threshold) {
-        return brightness < threshold;
     }
 
     private final Runnable mEnableFeatureRunnable = () -> {
@@ -71,34 +69,36 @@ public class AutoDcDimmingService extends Service {
         public void stopObserving() {
             final ContentResolver resolver = getContentResolver();
             resolver.unregisterContentObserver(this);
-            mHandler.removeCallbacks(mEnableFeatureRunnable);
-            mHandler.post(mDisableFeatureRunnable);
+            mHandler.removeCallbacksAndMessages(null);
+            if (mIsFeatureActive) {
+                mIsFeatureActive = false;
+                FileUtils.writeValue(getNodePath(), "0");
+            }
         }
     }
 
     private void handleBrightnessChange() {
         try {
             int brightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-            int threshold = mSharedPrefs.getInt(Constants.KEY_AUTO_DC_DIMMING_THRESHOLD, Constants.DEFAULT_AUTO_DC_DIMMING_THRESHOLD);
-            int timeToEnable = mSharedPrefs.getInt(Constants.KEY_AUTO_DC_DIMMING_ENABLE_TIME, 0) * 1000;
-            int timeToDisable = mSharedPrefs.getInt(Constants.KEY_AUTO_DC_DIMMING_DISABLE_TIME, 1) * 1000;
+            int threshold = mSharedPrefs.getInt(Constants.KEY_AUTO_DC_DIMMING_THRESHOLD, 
+                                                 Constants.getDcDimmingThresholdDefault(this));
 
             KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
             if (km != null && km.inKeyguardRestrictedInputMode()) {
                 return;
             }
 
-            if (shouldBeActive(brightness, threshold)) {
+            if (brightness < threshold) {
                 if (!mThresholdConditionMet) {
                     mThresholdConditionMet = true;
                     mHandler.removeCallbacks(mDisableFeatureRunnable);
-                    mHandler.postDelayed(mEnableFeatureRunnable, timeToEnable);
+                    mHandler.postDelayed(mEnableFeatureRunnable, DC_TRANSITION_DELAY_MS);
                 }
             } else {
                 if (mThresholdConditionMet) {
                     mThresholdConditionMet = false;
                     mHandler.removeCallbacks(mEnableFeatureRunnable);
-                    mHandler.postDelayed(mDisableFeatureRunnable, timeToDisable);
+                    mHandler.postDelayed(mDisableFeatureRunnable, DC_TRANSITION_DELAY_MS);
                 }
             }
         } catch (Settings.SettingNotFoundException e) {
@@ -145,8 +145,6 @@ public class AutoDcDimmingService extends Service {
         super.onDestroy();
         unregisterReceiver(mScreenStateReceiver);
         mBrightnessObserver.stopObserving();
-        mHandler.removeCallbacks(mEnableFeatureRunnable);
-        mHandler.removeCallbacks(mDisableFeatureRunnable);
         FileUtils.writeValue(getNodePath(), "0");
     }
 

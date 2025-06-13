@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2023-2024 The Evolution X Project
- * SPDX-License-Identifier: Apache-2.0
- */
+* Copyright (C) 2023-2024 The Evolution X Project
+* SPDX-License-Identifier: Apache-2.0
+*/
 
 package org.lineageos.settings.autohbm;
 
@@ -26,6 +26,8 @@ import org.lineageos.settings.Constants;
 import org.lineageos.settings.utils.FileUtils;
 
 public class AutoHbmService extends Service implements SensorEventListener {
+
+    private static final int HBM_TRANSITION_DELAY_MS = 700;
 
     private Handler mHandler;
     private SharedPreferences mSharedPrefs;
@@ -53,21 +55,22 @@ public class AutoHbmService extends Service implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
             float lux = event.values[0];
-            int threshold = mSharedPrefs.getInt(Constants.KEY_AUTO_HBM_THRESHOLD, Constants.DEFAULT_AUTO_HBM_THRESHOLD);
-            int timeToEnable = mSharedPrefs.getInt(Constants.KEY_AUTO_HBM_ENABLE_TIME, 0) * 1000;
-            int timeToDisable = mSharedPrefs.getInt(Constants.KEY_AUTO_HBM_DISABLE_TIME, 1) * 1000;
+            int activationThreshold = mSharedPrefs.getInt(Constants.KEY_AUTO_HBM_ACTIVATION_THRESHOLD, 
+                                                           Constants.getHbmActivationThresholdDefault(this));
+            int deactivationThreshold = mSharedPrefs.getInt(Constants.KEY_AUTO_HBM_DEACTIVATION_THRESHOLD, 
+                                                             Constants.getHbmDeactivationThresholdDefault(this));
  
-            if (lux > threshold) {
+            if (lux > activationThreshold) {
                 if (!mThresholdConditionMet) {
                     mThresholdConditionMet = true;
                     mHandler.removeCallbacks(mDisableFeatureRunnable);
-                    mHandler.postDelayed(mEnableFeatureRunnable, timeToEnable);
+                    mHandler.postDelayed(mEnableFeatureRunnable, HBM_TRANSITION_DELAY_MS);
                 }
-            } else {
+            } else if (lux < deactivationThreshold) {
                 if (mThresholdConditionMet) {
                     mThresholdConditionMet = false;
                     mHandler.removeCallbacks(mEnableFeatureRunnable);
-                    mHandler.postDelayed(mDisableFeatureRunnable, timeToDisable);
+                    mHandler.postDelayed(mDisableFeatureRunnable, HBM_TRANSITION_DELAY_MS);
                 }
             }
         }
@@ -117,7 +120,6 @@ public class AutoHbmService extends Service implements SensorEventListener {
         super.onDestroy();
         unregisterReceiver(mScreenStateReceiver);
         stopListening();
-        FileUtils.writeValue(Constants.getHbmNode(this), "0");
     }
 
     @Override
@@ -132,8 +134,13 @@ public class AutoHbmService extends Service implements SensorEventListener {
     }
 
     private void stopListening() {
-        mSensorManager.unregisterListener(this);
-        mHandler.removeCallbacks(mEnableFeatureRunnable);
-        mHandler.post(mDisableFeatureRunnable);
+        if (mLightSensor != null) {
+            mSensorManager.unregisterListener(this);
+        }
+        mHandler.removeCallbacksAndMessages(null);
+        if (mIsFeatureActive) {
+            mIsFeatureActive = false;
+            FileUtils.writeValue(Constants.getHbmNode(this), "0");
+        }
     }
 }

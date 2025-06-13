@@ -18,28 +18,27 @@
     <string name="tile_off">Off</string>
     <string name="tile_camera_in_use">Camera in use</string>
 
-    <!-- Auto hbm -->
+    <!-- Auto HBM -->
     <string name="auto_hbm_title">Automatic HBM</string>
     <string name="auto_hbm_main_switch_title">Use automatic HBM</string>
     <string name="auto_hbm_summary">Automatically enable high brightness mode based on sunlight intensity (lux)</string>
-    <string name="auto_hbm_threshold_title">Light threshold</string>
-    <string name="auto_hbm_threshold_summary">Define the light intensity threshold in lux units at which HBM is activated</string>
-    <string name="auto_hbm_enable_time_title">Enable time</string>
-    <string name="auto_hbm_enable_time_summary">Duration in seconds that the light threshold must be continuously met to activate HBM</string>
-    <string name="auto_hbm_disable_time_title">Disable time</string>
-    <string name="auto_hbm_disable_time_summary">Duration in seconds for which HBM is deactivated if the light threshold falls below the set level</string>
+    <string name="auto_hbm_activation_threshold_title">Activation threshold</string>
+    <string name="auto_hbm_activation_threshold_summary">Define the light intensity threshold in lux units at which HBM is activated</string>
+    <string name="auto_hbm_deactivation_threshold_title">Deactivation threshold</string>
+    <string name="auto_hbm_deactivation_threshold_summary">Define the light intensity threshold in lux units at which HBM is deactivated</string>
+    <string name="current_lux_title">Ambient Light Monitor</string>
+    <string name="auto_hbm_lux_summary_format">Current: %1$d lux / Range: %2$d - %3$d lux</string>
+    <string name="auto_hbm_activation_lt_deactivation_error">Activation threshold must be higher than deactivation threshold.</string>
+    <string name="auto_hbm_deactivation_gt_activation_error">Deactivation threshold must be lower than activation threshold.</string>
 
-    <!-- Dc Dimming --> 
+    <!-- Auto DC Dimming -->
     <string name="auto_dc_dim_title">Automatic Anti-Flicker Mode</string>
     <string name="auto_dc_dim_main_switch_title">Use Automatic Anti-Flicker Mode</string>
     <string name="auto_dc_dim_summary">Automatically reduces screen flicker by activating DC Dimming when the screen brightness is low.</string>
     <string name="auto_dc_dim_threshold_title">Brightness threshold</string>
-    <string name="auto_dc_dim_threshold_summary_brightness">Set the screen brightness level below which Anti-Flicker Mode will be activated.</string>
-    <string name="current_brightness_title">Current brightness</string>
-    <string name="auto_dc_dim_enable_time_title">Activation delay</string>
-    <string name="auto_dc_dim_enable_time_summary">Duration in seconds the brightness must remain below the threshold to activate the mode.</string>
-    <string name="auto_dc_dim_disable_time_title">Deactivation delay</string>
-    <string name="auto_dc_dim_disable_time_summary">Duration in seconds the brightness must remain above the threshold to deactivate the mode.</string>
+    <string name="auto_dc_dim_threshold_summary">Set the screen brightness level below which Anti-Flicker Mode will be activated.</string>
+    <string name="current_brightness_title">Brightness Monitor</string>
+    <string name="auto_dc_dim_brightness_summary_format">Current: %1$d / Threshold: %2$d</string>
 
     <!-- Saturation -->
     <string name="saturation_title">Saturation</string>

@@ -20,27 +20,9 @@
     <org.lineageos.settings.CustomSeekBarPreference
         android:key="auto_dc_dim_threshold"
         android:title="@string/auto_dc_dim_threshold_title"
-        android:summary="@string/auto_dc_dim_threshold_summary_brightness"
+        android:summary="@string/auto_dc_dim_threshold_summary"
         android:max="255"
         android:min="1"
         settings:units=""
-        android:defaultValue="50" />
-
-    <org.lineageos.settings.CustomSeekBarPreference
-        android:key="auto_dc_dim_enable_time"
-        android:title="@string/auto_dc_dim_enable_time_title"
-        android:summary="@string/auto_dc_dim_enable_time_summary"
-        android:max="10"
-        android:min="0"
-        settings:units="s"
-        android:defaultValue="0" />
-
-    <org.lineageos.settings.CustomSeekBarPreference
-        android:key="auto_dc_dim_disable_time"
-        android:title="@string/auto_dc_dim_disable_time_title"
-        android:summary="@string/auto_dc_dim_disable_time_summary"
-        android:max="10"
-        android:min="0"
-        settings:units="s"
-        android:defaultValue="1" />
+        android:defaultValue="@integer/config_autoDcDimmingThreshold" />
 </PreferenceScreen>

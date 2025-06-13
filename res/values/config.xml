@@ -4,10 +4,13 @@
     <!-- Auto hbm -->
     <bool name="config_autoHbmSupported">true</bool>
     <string name="config_autoHbmNode">/sys/devices/platform/soc/soc:qcom,dsi-display-primary/hbm</string>
+    <integer name="config_autoHbmActivationThreshold">8000</integer>
+    <integer name="config_autoHbmDeactivationThreshold">5000</integer>
 
-    <!-- Auto DC Dimming -->
+    <!-- Auto dc dimming -->
     <bool name="config_autoDcDimmingSupported">true</bool>
     <string name="config_autoDcDimmingNode">/sys/class/backlight/panel0-backlight/dim</string>
+    <integer name="config_autoDcDimmingThreshold">50</integer>
 
     <!-- Thermal -->
     <bool name="config_thermalSupported">true</bool>

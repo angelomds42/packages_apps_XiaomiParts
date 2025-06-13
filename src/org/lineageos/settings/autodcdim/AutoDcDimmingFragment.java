@@ -31,8 +31,6 @@ public class AutoDcDimmingFragment extends PreferenceFragmentCompat
     private MainSwitchPreference mMainSwitch;
     private CustomSeekBarPreference mThresholdPreference;
     private UsageProgressBarPreference mCurrentBrightnessPreference;
-    private CustomSeekBarPreference mEnableTimePreference;
-    private CustomSeekBarPreference mDisableTimePreference;
 
     private int mCurrentBrightness;
     private BrightnessObserver mBrightnessObserver;
@@ -57,9 +55,6 @@ public class AutoDcDimmingFragment extends PreferenceFragmentCompat
         mThresholdPreference = findPreference(Constants.KEY_AUTO_DC_DIMMING_THRESHOLD);
         mThresholdPreference.setOnPreferenceChangeListener(this);
 
-        mEnableTimePreference = findPreference(Constants.KEY_AUTO_DC_DIMMING_ENABLE_TIME);
-        mDisableTimePreference = findPreference(Constants.KEY_AUTO_DC_DIMMING_DISABLE_TIME);
-
         mCurrentBrightnessPreference = findPreference(Constants.KEY_CURRENT_BRIGHTNESS_LEVEL);
 
         mBrightnessObserver = new BrightnessObserver(new Handler(Looper.getMainLooper()));
@@ -73,6 +68,7 @@ public class AutoDcDimmingFragment extends PreferenceFragmentCompat
         if (mMainSwitch.isChecked()) {
             mBrightnessObserver.startObserving();
         }
+        updateBrightnessBar();
     }
 
     @Override
@@ -100,32 +96,33 @@ public class AutoDcDimmingFragment extends PreferenceFragmentCompat
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mThresholdPreference) {
-            int threshold = (Integer) newValue;
-            updateCurrentBrightnessPreference(mCurrentBrightness, threshold);
+            mSharedPrefs.edit().putInt(Constants.KEY_AUTO_DC_DIMMING_THRESHOLD, (Integer) newValue).apply();
+            updateBrightnessBar();
             return true;
         }
         return false;
     }
 
     private int getBrightnessProgressPercentage(int currentBrightness, int threshold) {
-        if (currentBrightness <= 0) return 100;
+        if (threshold <= 0) return 0;
         if (currentBrightness > threshold) return 0;
+        if (currentBrightness <= 0) return 100;
         return (int) (((float) (threshold - currentBrightness) / threshold) * 100);
     }
 
-    private void updateCurrentBrightnessPreference(int currentBrightness, int threshold) {
-        if (mCurrentBrightnessPreference != null) {
-            mCurrentBrightnessPreference.setUsageSummary(String.valueOf(currentBrightness));
-            mCurrentBrightnessPreference.setTotalSummary(String.valueOf(threshold));
-            mCurrentBrightnessPreference.setPercent(getBrightnessProgressPercentage(currentBrightness, threshold), 100);
-        }
+    private void updateBrightnessBar() {
+        if (mCurrentBrightnessPreference == null) return;
+
+        int threshold = mSharedPrefs.getInt(Constants.KEY_AUTO_DC_DIMMING_THRESHOLD,
+                Constants.getDcDimmingThresholdDefault(getContext()));
+        
+        mCurrentBrightnessPreference.setSummary(getString(R.string.auto_dc_dim_brightness_summary_format, mCurrentBrightness, threshold));
+        mCurrentBrightnessPreference.setPercent(getBrightnessProgressPercentage(mCurrentBrightness, threshold), 100);
     }
 
     private void togglePreferencesVisibility(boolean show) {
-        if (mCurrentBrightnessPreference != null) mCurrentBrightnessPreference.setVisible(show);
-        if (mThresholdPreference != null) mThresholdPreference.setVisible(show);
-        if (mEnableTimePreference != null) mEnableTimePreference.setVisible(show);
-        if (mDisableTimePreference != null) mDisableTimePreference.setVisible(show);
+        mCurrentBrightnessPreference.setVisible(show);
+        mThresholdPreference.setVisible(show);
     }
 
     private class BrightnessObserver extends ContentObserver {
@@ -154,9 +151,9 @@ public class AutoDcDimmingFragment extends PreferenceFragmentCompat
         private void updateBrightness() {
             try {
                 mCurrentBrightness = Settings.System.getInt(mResolver, Settings.System.SCREEN_BRIGHTNESS);
-                int threshold = mSharedPrefs.getInt(Constants.KEY_AUTO_DC_DIMMING_THRESHOLD, Constants.DEFAULT_AUTO_DC_DIMMING_THRESHOLD);
-                updateCurrentBrightnessPreference(mCurrentBrightness, threshold);
+                updateBrightnessBar();
             } catch (Settings.SettingNotFoundException e) {
+                // Ignore
             }
         }
     }

@@ -13,29 +13,28 @@
     <string name="tile_off">Desativado</string>
     <string name="tile_camera_in_use">Câmera em uso</string>
 
-    <!-- High Brightness Mode (HBM) -->
+    <!-- Auto HBM -->
     <string name="auto_hbm_title">Modo de alto brilho automático</string>
     <string name="auto_hbm_main_switch_title">Ativar modo de alto brilho automático</string>
     <string name="auto_hbm_summary">Aumenta automaticamente o brilho da tela em ambientes claros para melhor visibilidade.</string>
-    <string name="auto_hbm_threshold_title">Limite para ativação</string>
-    <string name="auto_hbm_threshold_summary">Defina o quão claro o ambiente precisa estar para ativar o modo de alto brilho.</string>
-    <string name="auto_hbm_enable_time_title">Atraso para ativar</string>
-    <string name="auto_hbm_enable_time_summary">Tempo que o ambiente deve permanecer claro antes de ativar.</string>
-    <string name="auto_hbm_disable_time_title">Atraso para desativar</string>
-    <string name="auto_hbm_disable_time_summary">Tempo que o ambiente deve permanecer escuro antes de desativar.</string>
+    <string name="auto_hbm_activation_threshold_title">Limite para ativação</string>
+    <string name="auto_hbm_activation_threshold_summary">Defina o quão claro o ambiente precisa estar para ativar o modo de alto brilho.</string>
+    <string name="auto_hbm_deactivation_threshold_title">Limite para desativação</string>
+    <string name="auto_hbm_deactivation_threshold_summary">Defina o limite de luz ambiente para desativar o modo de alto brilho.</string>
+    <string name="current_lux_title">Monitor de Luz Ambiente</string>
+    <string name="auto_hbm_lux_summary_format">Atual: %1$d lux / Intervalo: %2$d - %3$d lux</string>
+    <string name="auto_hbm_activation_lt_deactivation_error">O limite de ativação deve ser maior que o de desativação.</string>
+    <string name="auto_hbm_deactivation_gt_activation_error">O limite de desativação deve ser menor que o de ativação.</string>
 
-    <!-- DC Dimming -->
+    <!-- Auto DC Dimming -->
     <string name="auto_dc_dim_title">Modo Anti-Cintilação Automático</string>
     <string name="auto_dc_dim_main_switch_title">Usar Modo Anti-Cintilação Automático</string>
-    <string name="auto_dc_dim_summary">Reduz automaticamente o cintilação da tela ativando o DC Dimming quando o brilho está baixo.</string>
-    <string name="auto_dc_dim_threshold_title">Limite de brilho</string>
-    <string name="auto_dc_dim_threshold_summary_brightness">Define o nível de brilho da tela abaixo do qual o Modo Anti-Cintilação será ativado.</string>
-    <string name="current_brightness_title">Brilho atual</string>
-    <string name="auto_dc_dim_enable_time_title">Tempo para ativação</string>
-    <string name="auto_dc_dim_enable_time_summary">Duração em segundos que o brilho deve permanecer abaixo do limite para ativar o modo.</string>
-    <string name="auto_dc_dim_disable_time_title">Tempo para desativação</string>
-    <string name="auto_dc_dim_disable_time_summary">Duração em segundos que o brilho deve permanecer acima do limite para desativar o modo.</string>
-
+    <string name="auto_dc_dim_summary">Reduz automaticamente a cintilação da tela ativando o DC Dimming quando o brilho está baixo.</string>
+    <string name="auto_dc_dim_threshold_title">Limiar de brilho</string>
+    <string name="auto_dc_dim_threshold_summary">Define o nível de brilho da tela abaixo do qual o Modo Anti-Cintilação será ativado.</string>
+    <string name="current_brightness_title">Monitor de Brilho</string>
+    <string name="auto_dc_dim_brightness_summary_format">Atual: %1$d / Limiar: %2$d</string>
+    
     <!-- Saturation -->
     <string name="saturation_title">Saturação</string>
     <string name="saturation_summary">Controle o nível de saturação da tela</string>
