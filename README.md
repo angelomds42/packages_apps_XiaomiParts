@@ -5,6 +5,8 @@
 | **Display** | `Automatic high brightness mode (HBM)` | Enable peak luminance based on sunlight | Yes |
 |  | `Automatic DC Dimming` | Enable anti-flicker mode based on screen brightness | Yes |
 |  | `Saturation` | Control the saturation level of the display | Yes |
+| **Sound** | `Clear Speaker` | Plays a 30-second audio to clear the speaker. | No |
+| **Battery** | `Dynamic Thermal Profiles` | Optimize thermal management by setting specific profiles for each app. | No |
 
 ## Including XiaomiParts
 
@@ -23,17 +25,16 @@ include packages/apps/XiaomiParts/device.mk
 
 This line includes the [device.mk](https://github.com/angelomds42/packages_apps_XiaomiParts/blob/fifteen/device.mk) file from the XiaomiParts repository, which will add the XiaomiParts application and the necessary security policies (sepolicies) to your AOSP build during compilation.
 
-## Overlays
-- Support feature and node paths are defined with overlay:
+- Create an overlay for packages/apps/XiaomiParts/res/values/config.xml in your device tree and customize the values.
+
+# Overlay configs
+Feature support and device paths are defined via overlays. This allows you to enable or disable features and provide the correct paths for your device without modifying the XiaomiParts code:
 
 ```
-<!-- Auto hbm -->
-<bool name="config_autoHbmSupported">true</bool>
-<string name="config_autoHbmNode">/sys/...</string>
-<!-- Auto dc dim -->
-<bool name="config_autoDcDimmingSupported">true</bool>
-<string name="config_autoDcDimmingNode">/sys/...</string>
+packages/apps/XiaomiParts/res/values/config.xml
 ```
+
+- You can use the original [config.xml](https://github.com/angelomds42/packages_apps_XiaomiParts/blob/fifteen/res/values/config.xml) file as a reference.
 
 ## Testing changes
 
