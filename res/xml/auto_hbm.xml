@@ -42,9 +42,9 @@
     <org.lineageos.settings.CustomSeekBarPreference
         android:key="auto_hbm_disable_time"
         android:title="@string/auto_hbm_disable_time_title"
-        android:summary="@string/auto_hbm_disable_time_summary"
+        android:summary="@string/auto__summary"
         android:max="10"
         android:min="0"
         settings:units=""
-        android:defaultValue="1" />
+        android:defaultValue="3" />
 </PreferenceScreen>
