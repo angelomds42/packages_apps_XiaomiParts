@@ -30,7 +30,7 @@ public class Constants {
     public static String getDcDimmingNode(Context context) {
         return context.getResources().getString(R.string.config_autoDcDimmingNode);
     }
-    public static final int DEFAULT_AUTO_DC_DIMMING_THRESHOLD = 50;
+    public static final int DEFAULT_AUTO_DC_DIMMING_THRESHOLD = 20;
 
     // Clear Speaker
     public static final String KEY_CLEAR_SPEAKER = "clear_speaker_pref";
