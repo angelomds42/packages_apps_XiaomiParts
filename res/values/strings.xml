@@ -19,27 +19,28 @@
     <string name="tile_camera_in_use">Camera in use</string>
 
     <!-- Auto hbm -->
-    <string name="auto_hbm_title">Automatic HBM</string>
-    <string name="auto_hbm_main_switch_title">Use automatic HBM</string>
-    <string name="auto_hbm_summary">Automatically enable high brightness mode based on sunlight intensity (lux)</string>
-    <string name="auto_hbm_threshold_title">Light threshold</string>
-    <string name="auto_hbm_threshold_summary">Define the light intensity threshold in lux units at which HBM is activated</string>
-    <string name="auto_hbm_enable_time_title">Enable time</string>
-    <string name="auto_hbm_enable_time_summary">Duration in seconds that the light threshold must be continuously met to activate HBM</string>
-    <string name="auto_hbm_disable_time_title">Disable time</string>
-    <string name="auto_hbm_disable_time_summary">Duration in seconds for which HBM is deactivated if the light threshold falls below the set level</string>
+    <string name="auto_hbm_title">Auto sunlight mode</string>
+    <string name="auto_hbm_main_switch_title">Enable Auto sunlight mode</string>
+    <string name="auto_hbm_summary">Automatically increases screen brightness in bright light.</string>
+    <string name="auto_hbm_activation_threshold_title">Activation threshold</string>
+    <string name="auto_hbm_activation_threshold_summary">Increases brightness when the ambient light exceeds this value</string>
+    <string name="auto_hbm_deactivation_threshold_title">Deactivation threshold</string>
+    <string name="auto_hbm_deactivation_threshold_summary">Brightness returns to normal when the ambient light is below this value</string>
+    <string name="auto_hbm_threshold_error">The activation threshold must be higher than the deactivation threshold.</string>
+    <string name="auto_hbm_delay_title">Activation/deactivation delay</string>
+    <string name="auto_hbm_delay_summary">Prevents abrupt changes in screen brightness</string>
+    <string name="auto_hbm_warning">Prolonged use of this mode can cause the device to heat up and may reduce battery life.</string>    
 
-    <!-- Dc Dimming --> 
-    <string name="auto_dc_dim_title">Automatic Anti-Flicker Mode</string>
-    <string name="auto_dc_dim_main_switch_title">Use Automatic Anti-Flicker Mode</string>
-    <string name="auto_dc_dim_summary">Automatically reduces screen flicker by activating DC Dimming when the screen brightness is low.</string>
-    <string name="auto_dc_dim_threshold_title">Brightness threshold</string>
-    <string name="auto_dc_dim_threshold_summary_brightness">Set the screen brightness level below which Anti-Flicker Mode will be activated.</string>
+    <!-- Auto dc dimming -->
+    <string name="auto_dc_dim_title">Auto anti-flicker mode</string>
+    <string name="auto_dc_dim_main_switch_title">Use Auto anti-flicker mode</string>
+    <string name="auto_dc_dim_summary">Reduces screen flicker and eye strain in low light.</string>
+    <string name="auto_dc_dim_threshold_title">Activation threshold</string>
+    <string name="auto_dc_dim_threshold_summary_brightness">Activates when the brightness is below this level</string>
     <string name="current_brightness_title">Current brightness</string>
-    <string name="auto_dc_dim_enable_time_title">Activation delay</string>
-    <string name="auto_dc_dim_enable_time_summary">Duration in seconds the brightness must remain below the threshold to activate the mode.</string>
-    <string name="auto_dc_dim_disable_time_title">Deactivation delay</string>
-    <string name="auto_dc_dim_disable_time_summary">Duration in seconds the brightness must remain above the threshold to deactivate the mode.</string>
+    <string name="set_current_brightness_button_title">Use current brightness</string>
+    <string name="set_current_brightness_button_summary">Sets the activation point to your screen current brightness level.</string>
+    <string name="auto_dc_dim_warning">This mode may alter colors and could affect how videos or images are displayed.</string>
 
     <!-- Saturation -->
     <string name="saturation_title">Saturation</string>

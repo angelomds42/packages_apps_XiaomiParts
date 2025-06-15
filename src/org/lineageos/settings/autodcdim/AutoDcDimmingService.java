@@ -1,6 +1,5 @@
 package org.lineageos.settings.autodcdim;
 
-import android.app.KeyguardManager;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -22,34 +21,37 @@ import org.lineageos.settings.utils.FileUtils;
 
 public class AutoDcDimmingService extends Service {
 
-    private Handler mHandler;
     private SharedPreferences mSharedPrefs;
     private BrightnessObserver mBrightnessObserver;
 
-    private boolean mIsFeatureActive = false;
-    private boolean mThresholdConditionMet = false;
+    private Handler mHandler;
+    private final Runnable mEnableDCDimmingRunnable = () -> FileUtils.writeValue(getNodePath(), "1");
+    private final Runnable mDisableDCDimmingRunnable = () -> FileUtils.writeValue(getNodePath(), "0");
+
+    private static final int DC_DIMMING_DELAY_MS = 200;
 
     private String getNodePath() {
         return Constants.getDcDimmingNode(this);
     }
 
-    private boolean shouldBeActive(int brightness, int threshold) {
-        return brightness < threshold;
+    private void handleBrightnessChange() {
+        try {
+            int brightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+            int threshold = mSharedPrefs.getInt(Constants.KEY_AUTO_DC_DIMMING_THRESHOLD,
+                    Constants.getDefaultAutoDcDimmingThreshold(this));
+
+            if (brightness < threshold) {
+                mHandler.removeCallbacks(mDisableDCDimmingRunnable);
+                mHandler.postDelayed(mEnableDCDimmingRunnable, DC_DIMMING_DELAY_MS);
+            } else {
+                mHandler.removeCallbacks(mEnableDCDimmingRunnable);
+                mHandler.postDelayed(mDisableDCDimmingRunnable, DC_DIMMING_DELAY_MS);
+            }
+        } catch (Settings.SettingNotFoundException e) {
+            mHandler.removeCallbacks(mEnableDCDimmingRunnable);
+            mHandler.postDelayed(mDisableDCDimmingRunnable, DC_DIMMING_DELAY_MS);
+        }
     }
-
-    private final Runnable mEnableFeatureRunnable = () -> {
-        if (!mIsFeatureActive) {
-            mIsFeatureActive = true;
-            FileUtils.writeValue(getNodePath(), "1");
-        }
-    };
-
-    private final Runnable mDisableFeatureRunnable = () -> {
-        if (mIsFeatureActive) {
-            mIsFeatureActive = false;
-            FileUtils.writeValue(getNodePath(), "0");
-        }
-    };
 
     private class BrightnessObserver extends ContentObserver {
         public BrightnessObserver(Handler handler) {
@@ -71,38 +73,6 @@ public class AutoDcDimmingService extends Service {
         public void stopObserving() {
             final ContentResolver resolver = getContentResolver();
             resolver.unregisterContentObserver(this);
-            mHandler.removeCallbacks(mEnableFeatureRunnable);
-            mHandler.post(mDisableFeatureRunnable);
-        }
-    }
-
-    private void handleBrightnessChange() {
-        try {
-            int brightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-            int threshold = mSharedPrefs.getInt(Constants.KEY_AUTO_DC_DIMMING_THRESHOLD, Constants.DEFAULT_AUTO_DC_DIMMING_THRESHOLD);
-            int timeToEnable = mSharedPrefs.getInt(Constants.KEY_AUTO_DC_DIMMING_ENABLE_TIME, 0) * 1000;
-            int timeToDisable = mSharedPrefs.getInt(Constants.KEY_AUTO_DC_DIMMING_DISABLE_TIME, 1) * 1000;
-
-            KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-            if (km != null && km.inKeyguardRestrictedInputMode()) {
-                return;
-            }
-
-            if (shouldBeActive(brightness, threshold)) {
-                if (!mThresholdConditionMet) {
-                    mThresholdConditionMet = true;
-                    mHandler.removeCallbacks(mDisableFeatureRunnable);
-                    mHandler.postDelayed(mEnableFeatureRunnable, timeToEnable);
-                }
-            } else {
-                if (mThresholdConditionMet) {
-                    mThresholdConditionMet = false;
-                    mHandler.removeCallbacks(mEnableFeatureRunnable);
-                    mHandler.postDelayed(mDisableFeatureRunnable, timeToDisable);
-                }
-            }
-        } catch (Settings.SettingNotFoundException e) {
-            mHandler.post(mDisableFeatureRunnable);
         }
     }
 
@@ -113,6 +83,8 @@ public class AutoDcDimmingService extends Service {
                 mBrightnessObserver.startObserving();
             } else if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
                 mBrightnessObserver.stopObserving();
+                mHandler.removeCallbacksAndMessages(null);
+                FileUtils.writeValue(getNodePath(), "0");
             }
         }
     };
@@ -120,8 +92,8 @@ public class AutoDcDimmingService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        mHandler = new Handler(Looper.getMainLooper());
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mHandler = new Handler(Looper.getMainLooper());
         mBrightnessObserver = new BrightnessObserver(mHandler);
 
         IntentFilter screenStateFilter = new IntentFilter();
@@ -145,8 +117,7 @@ public class AutoDcDimmingService extends Service {
         super.onDestroy();
         unregisterReceiver(mScreenStateReceiver);
         mBrightnessObserver.stopObserving();
-        mHandler.removeCallbacks(mEnableFeatureRunnable);
-        mHandler.removeCallbacks(mDisableFeatureRunnable);
+        mHandler.removeCallbacksAndMessages(null);
         FileUtils.writeValue(getNodePath(), "0");
     }
 

@@ -30,13 +30,13 @@ public class AutoDcDimmingFragment extends PreferenceFragmentCompat
 
     private MainSwitchPreference mMainSwitch;
     private CustomSeekBarPreference mThresholdPreference;
-    private UsageProgressBarPreference mCurrentBrightnessPreference;
-    private CustomSeekBarPreference mEnableTimePreference;
-    private CustomSeekBarPreference mDisableTimePreference;
-
-    private int mCurrentBrightness;
-    private BrightnessObserver mBrightnessObserver;
+    private UsageProgressBarPreference mCurrentBrightnessLevelPreference;
+    private Preference mSetCurrentBrightnessButton;
     private SharedPreferences mSharedPrefs;
+
+    private Handler mHandler;
+    private BrightnessObserver mBrightnessObserver;
+    private int mCurrentBrightness;
 
     public static boolean isDcDimmingSupported(Context context) {
         return context.getResources().getBoolean(R.bool.config_autoDcDimmingSupported);
@@ -53,17 +53,30 @@ public class AutoDcDimmingFragment extends PreferenceFragmentCompat
         mMainSwitch.setChecked(mSharedPrefs.getBoolean(Constants.KEY_AUTO_DC_DIMMING, false));
         mMainSwitch.addOnSwitchChangeListener(this);
 
+        mCurrentBrightnessLevelPreference = findPreference(Constants.KEY_CURRENT_BRIGHTNESS_LEVEL);
+
         mThresholdPreference = findPreference(Constants.KEY_AUTO_DC_DIMMING_THRESHOLD);
         mThresholdPreference.setOnPreferenceChangeListener(this);
 
-        mEnableTimePreference = findPreference(Constants.KEY_AUTO_DC_DIMMING_ENABLE_TIME);
-        mDisableTimePreference = findPreference(Constants.KEY_AUTO_DC_DIMMING_DISABLE_TIME);
+        mSetCurrentBrightnessButton = findPreference("set_current_brightness_button");
 
-        mCurrentBrightnessPreference = findPreference(Constants.KEY_CURRENT_BRIGHTNESS_LEVEL);
+        mSetCurrentBrightnessButton.setOnPreferenceClickListener(preference -> {
+            try {
+                int currentBrightness = Settings.System.getInt(getContext().getContentResolver(),
+                        Settings.System.SCREEN_BRIGHTNESS);
 
-        mBrightnessObserver = new BrightnessObserver(new Handler(Looper.getMainLooper()));
+                mThresholdPreference.refresh(currentBrightness);
 
-        togglePreferencesVisibility(mMainSwitch.isChecked());
+                updateCurrentBrightnessLevelPreference(currentBrightness, currentBrightness);
+            } catch (Settings.SettingNotFoundException e) {
+            }
+            return true;
+        });
+
+        mHandler = new Handler(Looper.getMainLooper());
+        mBrightnessObserver = new BrightnessObserver(mHandler);
+
+        mCurrentBrightnessLevelPreference.setVisible(mMainSwitch.isChecked());
     }
 
     @Override
@@ -71,6 +84,7 @@ public class AutoDcDimmingFragment extends PreferenceFragmentCompat
         super.onResume();
         if (mMainSwitch.isChecked()) {
             mBrightnessObserver.startObserving();
+            updateCurrentBrightness();
         }
     }
 
@@ -83,80 +97,72 @@ public class AutoDcDimmingFragment extends PreferenceFragmentCompat
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         mSharedPrefs.edit().putBoolean(Constants.KEY_AUTO_DC_DIMMING, isChecked).apply();
+        
+        mCurrentBrightnessLevelPreference.setVisible(isChecked);
 
         Intent intent = new Intent(getContext(), AutoDcDimmingService.class);
         if (isChecked) {
             getContext().startServiceAsUser(intent, UserHandle.CURRENT);
             mBrightnessObserver.startObserving();
+            updateCurrentBrightness();
         } else {
             getContext().stopServiceAsUser(intent, UserHandle.CURRENT);
             mBrightnessObserver.stopObserving();
         }
-
-        togglePreferencesVisibility(isChecked);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mThresholdPreference) {
-            int threshold = (Integer) newValue;
-            updateCurrentBrightnessPreference(mCurrentBrightness, threshold);
-            return true;
+            final int threshold = (Integer) newValue;
+            updateCurrentBrightnessLevelPreference(mCurrentBrightness, threshold);
         }
-        return false;
+        return true;
+    }
+
+    private void updateCurrentBrightness() {
+        try {
+            mCurrentBrightness = Settings.System.getInt(getContext().getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS);
+            updateCurrentBrightnessLevelPreference(mCurrentBrightness, mThresholdPreference.getValue());
+        } catch (Settings.SettingNotFoundException e) {
+        }
+    }
+
+    private void updateCurrentBrightnessLevelPreference(int currentBrightness, int threshold) {
+        if (mCurrentBrightnessLevelPreference != null) {
+            mCurrentBrightnessLevelPreference.setUsageSummary(String.valueOf(currentBrightness));
+            mCurrentBrightnessLevelPreference.setTotalSummary(String.valueOf(threshold));
+            mCurrentBrightnessLevelPreference.setPercent(getBrightnessProgressPercentage(currentBrightness, threshold),
+                    100);
+        }
     }
 
     private int getBrightnessProgressPercentage(int currentBrightness, int threshold) {
-        if (currentBrightness <= 0) return 100;
-        if (currentBrightness > threshold) return 0;
-        return (int) (((float) (threshold - currentBrightness) / threshold) * 100);
-    }
-
-    private void updateCurrentBrightnessPreference(int currentBrightness, int threshold) {
-        if (mCurrentBrightnessPreference != null) {
-            mCurrentBrightnessPreference.setUsageSummary(String.valueOf(currentBrightness));
-            mCurrentBrightnessPreference.setTotalSummary(String.valueOf(threshold));
-            mCurrentBrightnessPreference.setPercent(getBrightnessProgressPercentage(currentBrightness, threshold), 100);
-        }
-    }
-
-    private void togglePreferencesVisibility(boolean show) {
-        if (mCurrentBrightnessPreference != null) mCurrentBrightnessPreference.setVisible(show);
-        if (mThresholdPreference != null) mThresholdPreference.setVisible(show);
-        if (mEnableTimePreference != null) mEnableTimePreference.setVisible(show);
-        if (mDisableTimePreference != null) mDisableTimePreference.setVisible(show);
+        if (threshold <= 0)
+            return 0;
+        int progress = (int) (100 * ((float) currentBrightness / (float) threshold));
+        return Math.max(0, Math.min(100, progress));
     }
 
     private class BrightnessObserver extends ContentObserver {
-        private final ContentResolver mResolver;
-
-        public BrightnessObserver(Handler handler) {
+        BrightnessObserver(Handler handler) {
             super(handler);
-            mResolver = getContext().getContentResolver();
         }
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            updateBrightness();
+            updateCurrentBrightness();
         }
 
-        public void startObserving() {
-            mResolver.registerContentObserver(Settings.System.getUriFor(
-                Settings.System.SCREEN_BRIGHTNESS), false, this);
-            updateBrightness();
+        void startObserving() {
+            ContentResolver resolver = getContext().getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.SCREEN_BRIGHTNESS), false, this);
         }
 
-        public void stopObserving() {
-            mResolver.unregisterContentObserver(this);
-        }
-
-        private void updateBrightness() {
-            try {
-                mCurrentBrightness = Settings.System.getInt(mResolver, Settings.System.SCREEN_BRIGHTNESS);
-                int threshold = mSharedPrefs.getInt(Constants.KEY_AUTO_DC_DIMMING_THRESHOLD, Constants.DEFAULT_AUTO_DC_DIMMING_THRESHOLD);
-                updateCurrentBrightnessPreference(mCurrentBrightness, threshold);
-            } catch (Settings.SettingNotFoundException e) {
-            }
+        void stopObserving() {
+            getContext().getContentResolver().unregisterContentObserver(this);
         }
     }
 }

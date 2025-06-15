@@ -13,9 +13,10 @@
         android:defaultValue="false" />
 
     <com.android.settingslib.widget.UsageProgressBarPreference
-        android:key="current_brightness_level" 
+        android:key="current_brightness_level"
         android:title="@string/current_brightness_title"
-        android:selectable="false" />
+        android:selectable="false"
+        android:dependency="auto_dc_dim" />
 
     <org.lineageos.settings.CustomSeekBarPreference
         android:key="auto_dc_dim_threshold"
@@ -24,23 +25,17 @@
         android:max="255"
         android:min="1"
         settings:units=""
-        android:defaultValue="50" />
+        android:defaultValue="@integer/config_autoDcDimmingThreshold"
+        android:dependency="auto_dc_dim" />
 
-    <org.lineageos.settings.CustomSeekBarPreference
-        android:key="auto_dc_dim_enable_time"
-        android:title="@string/auto_dc_dim_enable_time_title"
-        android:summary="@string/auto_dc_dim_enable_time_summary"
-        android:max="10"
-        android:min="0"
-        settings:units="s"
-        android:defaultValue="0" />
+    <Preference
+        android:key="set_current_brightness_button"
+        android:title="@string/set_current_brightness_button_title"
+        android:summary="@string/set_current_brightness_button_summary"
+        android:dependency="auto_dc_dim" />
 
-    <org.lineageos.settings.CustomSeekBarPreference
-        android:key="auto_dc_dim_disable_time"
-        android:title="@string/auto_dc_dim_disable_time_title"
-        android:summary="@string/auto_dc_dim_disable_time_summary"
-        android:max="10"
-        android:min="0"
-        settings:units="s"
-        android:defaultValue="1" />
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/auto_dc_dim_warning"
+        android:selectable="false"/>
+
 </PreferenceScreen>

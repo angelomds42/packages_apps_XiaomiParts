@@ -27,48 +27,42 @@ import org.lineageos.settings.utils.FileUtils;
 
 public class AutoHbmService extends Service implements SensorEventListener {
 
-    private Handler mHandler;
     private SharedPreferences mSharedPrefs;
     private SensorManager mSensorManager;
     private Sensor mLightSensor;
 
+    private Handler mHandler;
     private boolean mIsFeatureActive = false;
-    private boolean mThresholdConditionMet = false;
 
-    private final Runnable mEnableFeatureRunnable = () -> {
-        if (!mIsFeatureActive) {
-            mIsFeatureActive = true;
-            FileUtils.writeValue(Constants.getHbmNode(this), "1");
-        }
+    private final Runnable mEnableHBMRunnable = () -> {
+        FileUtils.writeValue(Constants.getHbmNode(this), "1");
+        mIsFeatureActive = true;
     };
 
-    private final Runnable mDisableFeatureRunnable = () -> {
-        if (mIsFeatureActive) {
-            mIsFeatureActive = false;
-            FileUtils.writeValue(Constants.getHbmNode(this), "0");
-        }
+    private final Runnable mDisableHBMRunnable = () -> {
+        FileUtils.writeValue(Constants.getHbmNode(this), "0");
+        mIsFeatureActive = false;
     };
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
             float lux = event.values[0];
-            int threshold = mSharedPrefs.getInt(Constants.KEY_AUTO_HBM_THRESHOLD, Constants.DEFAULT_AUTO_HBM_THRESHOLD);
-            int timeToEnable = mSharedPrefs.getInt(Constants.KEY_AUTO_HBM_ENABLE_TIME, 0) * 1000;
-            int timeToDisable = mSharedPrefs.getInt(Constants.KEY_AUTO_HBM_DISABLE_TIME, 1) * 1000;
- 
-            if (lux > threshold) {
-                if (!mThresholdConditionMet) {
-                    mThresholdConditionMet = true;
-                    mHandler.removeCallbacks(mDisableFeatureRunnable);
-                    mHandler.postDelayed(mEnableFeatureRunnable, timeToEnable);
-                }
-            } else {
-                if (mThresholdConditionMet) {
-                    mThresholdConditionMet = false;
-                    mHandler.removeCallbacks(mEnableFeatureRunnable);
-                    mHandler.postDelayed(mDisableFeatureRunnable, timeToDisable);
-                }
+            int activationThreshold = mSharedPrefs.getInt(
+                    Constants.KEY_AUTO_HBM_ACTIVATION_THRESHOLD,
+                    Constants.getDefaultAutoHbmActivationThreshold(this));
+            int deactivationThreshold = mSharedPrefs.getInt(
+                    Constants.KEY_AUTO_HBM_DEACTIVATION_THRESHOLD,
+                    Constants.getDefaultAutoHbmDeactivationThreshold(this));
+
+            int hbmDelay = mSharedPrefs.getInt(Constants.KEY_AUTO_HBM_DELAY, 700);
+
+            if (!mIsFeatureActive && lux > activationThreshold) {
+                mHandler.removeCallbacks(mDisableHBMRunnable);
+                mHandler.postDelayed(mEnableHBMRunnable, hbmDelay);
+            } else if (mIsFeatureActive && lux < deactivationThreshold) {
+                mHandler.removeCallbacks(mEnableHBMRunnable);
+                mHandler.postDelayed(mDisableHBMRunnable, hbmDelay);
             }
         }
     }
@@ -91,16 +85,16 @@ public class AutoHbmService extends Service implements SensorEventListener {
     @Override
     public void onCreate() {
         super.onCreate();
-        mHandler = new Handler(Looper.getMainLooper());
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mHandler = new Handler(Looper.getMainLooper());
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mLightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
- 
+
         IntentFilter screenStateFilter = new IntentFilter();
         screenStateFilter.addAction(Intent.ACTION_SCREEN_ON);
         screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
         registerReceiver(mScreenStateReceiver, screenStateFilter, Context.RECEIVER_NOT_EXPORTED);
- 
+
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         if (pm.isInteractive()) {
             startListening();
@@ -117,7 +111,6 @@ public class AutoHbmService extends Service implements SensorEventListener {
         super.onDestroy();
         unregisterReceiver(mScreenStateReceiver);
         stopListening();
-        FileUtils.writeValue(Constants.getHbmNode(this), "0");
     }
 
     @Override
@@ -132,8 +125,13 @@ public class AutoHbmService extends Service implements SensorEventListener {
     }
 
     private void stopListening() {
-        mSensorManager.unregisterListener(this);
-        mHandler.removeCallbacks(mEnableFeatureRunnable);
-        mHandler.post(mDisableFeatureRunnable);
+        if (mLightSensor != null) {
+            mSensorManager.unregisterListener(this);
+        }
+        mHandler.removeCallbacksAndMessages(null);
+        if (mIsFeatureActive) {
+            FileUtils.writeValue(Constants.getHbmNode(this), "0");
+            mIsFeatureActive = false;
+        }
     }
 }

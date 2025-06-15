@@ -3,8 +3,11 @@
 
     <!-- XiaomiParts -->
     <string name="xiaomi_parts_title">Ajustes da Xiaomi</string>
-    <string name="kernel_node_access_error">Falha no acesso ao nó do kernel! Verifique se o caminho para o atributo sysfs ou procfs está correto, se há permissões apropriadas e se as políticas do SELinux estão configuradas corretamente.</string>
-    <string name="kernel_node_returned_value_unknown">Nenhum recurso de texto encontrado para o valor retornado pelo nó.</string>
+    <string name="kernel_node_access_error">Falha no acesso ao nó do kernel! Verifique se o caminho
+        para o atributo sysfs ou procfs está correto, se há permissões apropriadas e se as políticas
+        do SELinux estão configuradas corretamente.</string>
+    <string name="kernel_node_returned_value_unknown">Nenhum recurso de texto encontrado para o
+        valor retornado pelo nó.</string>
     <string name="tile_add">Adicionar atalho</string>
     <string name="tile_added">Atalho adicionado</string>
     <string name="tile_not_added">Atalho não adicionado</string>
@@ -13,38 +16,41 @@
     <string name="tile_off">Desativado</string>
     <string name="tile_camera_in_use">Câmera em uso</string>
 
-    <!-- High Brightness Mode (HBM) -->
-    <string name="auto_hbm_title">Modo de alto brilho automático</string>
-    <string name="auto_hbm_main_switch_title">Ativar modo de alto brilho automático</string>
-    <string name="auto_hbm_summary">Aumenta automaticamente o brilho da tela em ambientes claros para melhor visibilidade.</string>
-    <string name="auto_hbm_threshold_title">Limite para ativação</string>
-    <string name="auto_hbm_threshold_summary">Defina o quão claro o ambiente precisa estar para ativar o modo de alto brilho.</string>
-    <string name="auto_hbm_enable_time_title">Atraso para ativar</string>
-    <string name="auto_hbm_enable_time_summary">Tempo que o ambiente deve permanecer claro antes de ativar.</string>
-    <string name="auto_hbm_disable_time_title">Atraso para desativar</string>
-    <string name="auto_hbm_disable_time_summary">Tempo que o ambiente deve permanecer escuro antes de desativar.</string>
+    <!-- Auto hbm -->
+    <string name="auto_hbm_title">Modo de luz solar automático</string>
+    <string name="auto_hbm_main_switch_title">Ativar Modo de luz solar</string>
+    <string name="auto_hbm_summary">Aumenta o brilho da tela automaticamente em ambientes claros.</string>
+    <string name="auto_hbm_activation_threshold_title">Limite de ativação</string>
+    <string name="auto_hbm_activation_threshold_summary">Aumenta o brilho quando a luz ambiente excede este valor</string>
+    <string name="auto_hbm_deactivation_threshold_title">Limite de desativação</string>
+    <string name="auto_hbm_deactivation_threshold_summary">O brilho volta ao normal quando a luz ambiente está abaixo deste valor</string>
+    <string name="auto_hbm_threshold_error">O limite de ativação deve ser maior que o de desativação.</string>
+    <string name="auto_hbm_delay_title">Atraso na ativação/desativação</string>
+    <string name="auto_hbm_delay_summary">Evita mudanças bruscas no brilho da tela</string>
+    <string name="auto_hbm_warning">O uso prolongado deste modo pode aquecer o dispositivo e reduzir a duração da bateria.</string>
 
-    <!-- DC Dimming -->
-    <string name="auto_dc_dim_title">Modo Anti-Cintilação Automático</string>
-    <string name="auto_dc_dim_main_switch_title">Usar Modo Anti-Cintilação Automático</string>
-    <string name="auto_dc_dim_summary">Reduz automaticamente o cintilação da tela ativando o DC Dimming quando o brilho está baixo.</string>
-    <string name="auto_dc_dim_threshold_title">Limite de brilho</string>
-    <string name="auto_dc_dim_threshold_summary_brightness">Define o nível de brilho da tela abaixo do qual o Modo Anti-Cintilação será ativado.</string>
+    <!-- Auto dc dimming -->
+    <string name="auto_dc_dim_title">Modo anti-oscilação</string>
+    <string name="auto_dc_dim_main_switch_title">Usar Modo anti-oscilação</string>
+    <string name="auto_dc_dim_summary">Reduz a oscilação da tela e o cansaço visual em pouca luz.</string>
+    <string name="auto_dc_dim_threshold_title">Limite de ativação</string>
+    <string name="auto_dc_dim_threshold_summary_brightness">Ativa quando o brilho está abaixo deste nível</string>
     <string name="current_brightness_title">Brilho atual</string>
-    <string name="auto_dc_dim_enable_time_title">Tempo para ativação</string>
-    <string name="auto_dc_dim_enable_time_summary">Duração em segundos que o brilho deve permanecer abaixo do limite para ativar o modo.</string>
-    <string name="auto_dc_dim_disable_time_title">Tempo para desativação</string>
-    <string name="auto_dc_dim_disable_time_summary">Duração em segundos que o brilho deve permanecer acima do limite para desativar o modo.</string>
+    <string name="set_current_brightness_button_title">Usar brilho atual</string>
+    <string name="set_current_brightness_button_summary">Define o ponto de ativação para o nível de brilho atual da tela.</string>
+    <string name="auto_dc_dim_warning">Este modo pode alterar as cores e afetar a exibição de vídeos ou imagens.</string>
 
     <!-- Saturation -->
     <string name="saturation_title">Saturação</string>
     <string name="saturation_summary">Controle o nível de saturação da tela</string>
-    <string name="saturation_footer_summary">Mudar o modo de cor nas configurações de tela substituirá o nível de saturação, exigindo que ele seja reaplicado.</string>
+    <string name="saturation_footer_summary">Mudar o modo de cor nas configurações de tela
+        substituirá o nível de saturação, exigindo que ele seja reaplicado.</string>
 
     <!-- Custom seekbar -->
     <string name="custom_seekbar_value">Valor: <xliff:g id="v">%s</xliff:g></string>
     <string name="custom_seekbar_default_value">padrão</string>
-    <string name="custom_seekbar_default_value_to_set">Valor padrão: <xliff:g id="v">%s</xliff:g>\nToque longo para definir</string>
+    <string name="custom_seekbar_default_value_to_set">Valor padrão: <xliff:g id="v">%s</xliff:g>\nToque
+        longo para definir</string>
     <string name="custom_seekbar_default_value_is_set">Valor padrão definido</string>
 
     <!-- Image preview -->

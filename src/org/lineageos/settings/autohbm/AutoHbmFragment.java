@@ -15,6 +15,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -31,13 +32,15 @@ public class AutoHbmFragment extends PreferenceFragmentCompat
         implements CompoundButton.OnCheckedChangeListener, SensorEventListener, Preference.OnPreferenceChangeListener {
 
     private MainSwitchPreference mMainSwitch;
-    private CustomSeekBarPreference mThresholdPreference;
+    private CustomSeekBarPreference mActivationThresholdPreference;
+    private CustomSeekBarPreference mDeactivationThresholdPreference;
     private UsageProgressBarPreference mCurrentLuxLevelPreference;
-    private CustomSeekBarPreference mEnableTimePreference;
-    private CustomSeekBarPreference mDisableTimePreference;
+
     private SensorManager mSensorManager;
     private Sensor mLightSensor;
     private int mCurrentLux;
+
+    private static final int THRESHOLD_INTERVAL = 100;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -51,18 +54,18 @@ public class AutoHbmFragment extends PreferenceFragmentCompat
         mMainSwitch.setChecked(sharedPrefs.getBoolean(Constants.KEY_AUTO_HBM, false));
         mMainSwitch.addOnSwitchChangeListener(this);
 
-        mThresholdPreference = findPreference(Constants.KEY_AUTO_HBM_THRESHOLD);
-        mThresholdPreference.setOnPreferenceChangeListener(this);
+        mActivationThresholdPreference = findPreference(Constants.KEY_AUTO_HBM_ACTIVATION_THRESHOLD);
+        mActivationThresholdPreference.setOnPreferenceChangeListener(this);
 
-        mEnableTimePreference = findPreference(Constants.KEY_AUTO_HBM_ENABLE_TIME);
-        mDisableTimePreference = findPreference(Constants.KEY_AUTO_HBM_DISABLE_TIME);
+        mDeactivationThresholdPreference = findPreference(Constants.KEY_AUTO_HBM_DEACTIVATION_THRESHOLD);
+        mDeactivationThresholdPreference.setOnPreferenceChangeListener(this);
 
         mCurrentLuxLevelPreference = findPreference(Constants.KEY_CURRENT_LUX_LEVEL);
 
+        mCurrentLuxLevelPreference.setVisible(mMainSwitch.isChecked());
+
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         mLightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
- 
-        togglePreferencesVisibility(mMainSwitch.isChecked());
     }
 
     @Override
@@ -84,6 +87,8 @@ public class AutoHbmFragment extends PreferenceFragmentCompat
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         sharedPrefs.edit().putBoolean(Constants.KEY_AUTO_HBM, isChecked).apply();
 
+        mCurrentLuxLevelPreference.setVisible(isChecked);
+
         Intent intent = new Intent(getContext(), AutoHbmService.class);
         if (isChecked) {
             getContext().startServiceAsUser(intent, UserHandle.CURRENT);
@@ -92,27 +97,37 @@ public class AutoHbmFragment extends PreferenceFragmentCompat
             getContext().stopServiceAsUser(intent, UserHandle.CURRENT);
             mSensorManager.unregisterListener(this);
         }
-
-        togglePreferencesVisibility(isChecked);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mThresholdPreference && mCurrentLuxLevelPreference != null) {
-            int threshold = (int) newValue;
-            updateCurrentLuxLevelPreference(mCurrentLux, threshold);
-            return true;
+        int newActivationThreshold = mActivationThresholdPreference.getValue();
+        int newDeactivationThreshold = mDeactivationThresholdPreference.getValue();
+
+        if (preference == mActivationThresholdPreference) {
+            newActivationThreshold = (Integer) newValue;
+            if (newActivationThreshold <= newDeactivationThreshold) {
+                newDeactivationThreshold = newActivationThreshold - THRESHOLD_INTERVAL;
+                mDeactivationThresholdPreference.refresh(newDeactivationThreshold);
+            }
+        } else if (preference == mDeactivationThresholdPreference) {
+            newDeactivationThreshold = (Integer) newValue;
+            if (newActivationThreshold <= newDeactivationThreshold) {
+                newActivationThreshold = newDeactivationThreshold + THRESHOLD_INTERVAL;
+                mActivationThresholdPreference.refresh(newActivationThreshold);
+            }
         }
-        return false;
+
+        updateCurrentLuxLevelPreference(mCurrentLux, newActivationThreshold);
+        return true;
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
             mCurrentLux = (int) event.values[0];
-            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-            int threshold = sharedPrefs.getInt(Constants.KEY_AUTO_HBM_THRESHOLD, Constants.DEFAULT_AUTO_HBM_THRESHOLD);
-            updateCurrentLuxLevelPreference(mCurrentLux, threshold);
+            int activationThreshold = mActivationThresholdPreference.getValue();
+            updateCurrentLuxLevelPreference(mCurrentLux, activationThreshold);
         }
     }
 
@@ -124,20 +139,15 @@ public class AutoHbmFragment extends PreferenceFragmentCompat
         if (mCurrentLuxLevelPreference != null) {
             mCurrentLuxLevelPreference.setUsageSummary(String.valueOf(currentLux));
             mCurrentLuxLevelPreference.setTotalSummary(String.valueOf(threshold));
-            mCurrentLuxLevelPreference.setPercent(getLuxProgressPercentage(currentLux, threshold),100);
+            mCurrentLuxLevelPreference.setPercent(getLuxProgressPercentage(currentLux, threshold), 100);
         }
     }
 
-    private void togglePreferencesVisibility(boolean show) {
-        if (mCurrentLuxLevelPreference != null) mCurrentLuxLevelPreference.setVisible(show);
-        if (mThresholdPreference != null) mThresholdPreference.setVisible(show);
-        if (mEnableTimePreference != null) mEnableTimePreference.setVisible(show);
-        if (mDisableTimePreference != null) mDisableTimePreference.setVisible(show);
-    }
-
     private int getLuxProgressPercentage(int currentLux, int threshold) {
-        if (currentLux >= threshold) return 100;
-        if (threshold <= 0) return 0;
+        if (currentLux >= threshold)
+            return 100;
+        if (threshold <= 0)
+            return 0;
         return (int) (((float) currentLux / threshold) * 100);
     }
 
