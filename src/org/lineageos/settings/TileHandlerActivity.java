@@ -17,6 +17,7 @@ import org.lineageos.settings.autohbm.AutoHbmActivity;
 import org.lineageos.settings.autohbm.AutoHbmTileService;
 import org.lineageos.settings.autodcdim.AutoDcDimmingActivity;
 import org.lineageos.settings.autodcdim.AutoDcDimmingTileService;
+import org.lineageos.settings.refreshrate.RefreshTileService;
 import org.lineageos.settings.saturation.SaturationActivity;
 import org.lineageos.settings.saturation.SaturationTileService;
 
@@ -40,6 +41,8 @@ public final class TileHandlerActivity extends Activity {
                     aIntent.setClass(this, AutoDcDimmingActivity.class);
                 } else if (qsName.equals(SaturationTileService.class.getName())) {
                     aIntent.setClass(this, SaturationActivity.class);
+                } else if (qsName.equals(RefreshTileService.class.getName())) {
+                    aIntent.setAction(Settings.ACTION_DISPLAY_SETTINGS);
                 } else {
                     aIntent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     aIntent.setData(Uri.fromParts("package", qsTile.getPackageName(), null));

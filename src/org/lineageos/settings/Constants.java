@@ -54,6 +54,7 @@ public class Constants {
     public static final String THERMAL_PREF_KEY_PREFIX = "thermal_profile_";
     public static final String THERMAL_DEFAULT_PROFILE_VALUE = "0";
     public static final String KEY_THERMAL_AUTO_SELECTION = "thermal_auto_selection_switch";
+
     public static boolean isThermalSupported(Context context) {
         return context.getResources().getBoolean(R.bool.config_thermalSupported);
     }
@@ -61,4 +62,8 @@ public class Constants {
     // Saturation
     public static final String KEY_SATURATION = "saturation";
     public static final String KEY_SATURATION_PREVIEW = "saturation_preview";
+
+    // Refresh Rate
+    public static final String KEY_MIN_REFRESH_RATE = "min_refresh_rate";
+    public static final String KEY_PEAK_REFRESH_RATE = "peak_refresh_rate";
 }

@@ -25,4 +25,10 @@
     </string-array>
     <string name="config_thermalNode" translatable="false">/sys/class/thermal/thermal_message/sconfig</string>
 
+    <!-- Refresh Rate -->
+    <string-array name="refresh_rate_tile_options" translatable="false">
+        <item>60, 60</item>
+        <item>90, 90</item>
+        <item>60, 90</item>
+     </string-array>
 </resources>

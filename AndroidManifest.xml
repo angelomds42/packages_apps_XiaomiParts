@@ -184,5 +184,17 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
+
+        <!-- Refresh Rate title service -->
+        <service
+            android:name=".refreshrate.RefreshTileService"
+            android:icon="@drawable/ic_refresh_rate_tile"
+            android:label="@string/refresh_rate_title"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
     </application>
 </manifest>

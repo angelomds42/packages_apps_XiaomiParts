@@ -76,4 +76,7 @@
     <string name="thermal_profile_streaming">Streaming</string>
     <string name="thermal_auto_selection_title">Modo de Seleção Automática</string>
     <string name="thermal_auto_selection_summary">Permite que o sistema escolha o melhor perfil térmico para o aplicativo em uso.</string>
+
+    <!-- Refresh Rate -->
+    <string name="refresh_rate_title">Taxa de Atualização</string>
 </resources>
