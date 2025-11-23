@@ -20,11 +20,12 @@ import android.widget.CompoundButton;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
+
 import org.lineageos.settings.Constants;
 import org.lineageos.settings.R;
 
@@ -34,7 +35,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ThermalFragment extends PreferenceFragmentCompat
+public class ThermalFragment extends SettingsBasePreferenceFragment
         implements CompoundButton.OnCheckedChangeListener {
 
     private static final String KEY_PER_APP_CATEGORY = "per_app_profile_category";

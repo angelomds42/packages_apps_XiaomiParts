@@ -14,18 +14,18 @@ import android.provider.Settings;
 import android.widget.CompoundButton;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import com.android.settingslib.widget.MainSwitchPreference;
 import com.android.settingslib.widget.UsageProgressBarPreference;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 
 import org.lineageos.settings.Constants;
 import org.lineageos.settings.CustomSeekBarPreference;
 import org.lineageos.settings.R;
 import org.lineageos.settings.utils.FileUtils;
 
-public class AutoDcDimmingFragment extends PreferenceFragmentCompat
+public class AutoDcDimmingFragment extends SettingsBasePreferenceFragment
         implements CompoundButton.OnCheckedChangeListener, Preference.OnPreferenceChangeListener {
 
     private MainSwitchPreference mMainSwitch;

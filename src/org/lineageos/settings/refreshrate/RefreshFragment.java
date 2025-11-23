@@ -14,10 +14,11 @@ import android.widget.CompoundButton;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
+
 import org.lineageos.settings.Constants;
 import org.lineageos.settings.R;
 import org.lineageos.settings.thermal.AppProfilePreference;
@@ -28,7 +29,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class RefreshFragment extends PreferenceFragmentCompat
+public class RefreshFragment extends SettingsBasePreferenceFragment
         implements CompoundButton.OnCheckedChangeListener {
 
     private MainSwitchPreference mMainSwitch;

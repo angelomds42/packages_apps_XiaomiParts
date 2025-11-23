@@ -18,17 +18,17 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import com.android.settingslib.widget.MainSwitchPreference;
 import com.android.settingslib.widget.UsageProgressBarPreference;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 
 import org.lineageos.settings.Constants;
 import org.lineageos.settings.CustomSeekBarPreference;
 import org.lineageos.settings.R;
 
-public class AutoHbmFragment extends PreferenceFragmentCompat
+public class AutoHbmFragment extends SettingsBasePreferenceFragment
         implements CompoundButton.OnCheckedChangeListener, SensorEventListener, Preference.OnPreferenceChangeListener {
 
     private MainSwitchPreference mMainSwitch;

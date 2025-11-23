@@ -13,13 +13,14 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.CompoundButton;
 
-import androidx.preference.PreferenceFragmentCompat;
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
+
 import org.lineageos.settings.Constants;
 import org.lineageos.settings.R;
 import java.io.IOException;
 
-public class ClearSpeakerFragment extends PreferenceFragmentCompat implements CompoundButton.OnCheckedChangeListener {
+public class ClearSpeakerFragment extends SettingsBasePreferenceFragment implements CompoundButton.OnCheckedChangeListener {
 
     private static final String TAG = "ClearSpeakerFragment";
     private static final int PLAY_DURATION_MS = 30000;
