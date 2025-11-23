@@ -37,6 +37,7 @@
         android:defaultValue="@integer/config_autoHbmDeactivationThreshold"
         android:dependency="auto_hbm" />
 
+    <!-- 
     <org.lineageos.settings.CustomSeekBarPreference
         android:key="auto_hbm_transition_delay"
         android:title="@string/auto_hbm_delay_title"
@@ -45,7 +46,8 @@
         android:min="0"
         settings:units=" ms"
         android:defaultValue="700"
-        android:dependency="auto_hbm" />
+        android:dependency="auto_hbm" /> 
+    -->
 
     <com.android.settingslib.widget.FooterPreference
         android:title="@string/auto_hbm_warning"
