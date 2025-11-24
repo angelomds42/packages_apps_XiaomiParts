@@ -84,31 +84,37 @@ public class CustomSeekBarPreference extends Preference implements Slider.OnChan
         }
         if (newInterval == null) {
             newInterval = attrs.getAttributeValue(SETTINGS_NS_ALT, "interval");
-            if (newInterval != null) mInterval = Integer.parseInt(newInterval);
+            if (newInterval != null)
+                mInterval = Integer.parseInt(newInterval);
         }
         if (newInterval == null) {
             newInterval = attrs.getAttributeValue(ANDROIDNS, "interval");
-            if (newInterval != null) mInterval = Integer.parseInt(newInterval);
+            if (newInterval != null)
+                mInterval = Integer.parseInt(newInterval);
         }
 
         mMinValue = attrs.getAttributeIntValue(SETTINGS_NS, "min", mMinValue);
         if (mMinValue == 0) {
             int min = attrs.getAttributeIntValue(SETTINGS_NS_ALT, "min", mMinValue);
-            if (min != 0) mMinValue = min;
+            if (min != 0)
+                mMinValue = min;
         }
         if (mMinValue == 0) {
             int min = attrs.getAttributeIntValue(ANDROIDNS, "min", mMinValue);
-            if (min != 0) mMinValue = min;
+            if (min != 0)
+                mMinValue = min;
         }
 
         mMaxValue = attrs.getAttributeIntValue(ANDROIDNS, "max", mMaxValue);
         if (mMaxValue == 100) {
             int max = attrs.getAttributeIntValue(SETTINGS_NS, "max", mMaxValue);
-            if (max != 100) mMaxValue = max;
+            if (max != 100)
+                mMaxValue = max;
         }
         if (mMaxValue == 100) {
             int max = attrs.getAttributeIntValue(SETTINGS_NS_ALT, "max", mMaxValue);
-            if (max != 100) mMaxValue = max;
+            if (max != 100)
+                mMaxValue = max;
         }
         if (mMaxValue < mMinValue)
             mMaxValue = mMinValue;
@@ -155,8 +161,7 @@ public class CustomSeekBarPreference extends Preference implements Slider.OnChan
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        try
-        {
+        try {
             ViewParent oldContainer = mSlider.getParent();
             ViewGroup newContainer = (ViewGroup) holder.findViewById(R.id.seekbar);
             if (oldContainer != newContainer) {
@@ -182,54 +187,39 @@ public class CustomSeekBarPreference extends Preference implements Slider.OnChan
         }
 
         mSlider.setTrackActiveTintList(getContext().getColorStateList(
-                com.android.settingslib.widget.preference.slider.R.color
-                .settingslib_expressive_color_slider_track_active));
+                com.android.settingslib.widget.preference.slider.R.color.settingslib_expressive_color_slider_track_active));
         mSlider.setTrackInactiveTintList(getContext().getColorStateList(
-                com.android.settingslib.widget.preference.slider.R.color
-                .settingslib_expressive_color_slider_track_inactive));
+                com.android.settingslib.widget.preference.slider.R.color.settingslib_expressive_color_slider_track_inactive));
         mSlider.setThumbTintList(getContext().getColorStateList(
-                com.android.settingslib.widget.preference.slider.R.color
-                .settingslib_expressive_color_slider_thumb));
+                com.android.settingslib.widget.preference.slider.R.color.settingslib_expressive_color_slider_thumb));
         mSlider.setHaloTintList(getContext().getColorStateList(
-                com.android.settingslib.widget.preference.slider.R.color
-                .settingslib_expressive_color_slider_halo));
+                com.android.settingslib.widget.preference.slider.R.color.settingslib_expressive_color_slider_halo));
         mSlider.setTickActiveTintList(getContext().getColorStateList(
-                com.android.settingslib.widget.preference.slider.R.color
-                .settingslib_expressive_color_slider_track_active));
+                com.android.settingslib.widget.preference.slider.R.color.settingslib_expressive_color_slider_track_active));
         mSlider.setTickInactiveTintList(getContext().getColorStateList(
-                com.android.settingslib.widget.preference.slider.R.color
-                .settingslib_expressive_color_slider_track_inactive));
+                com.android.settingslib.widget.preference.slider.R.color.settingslib_expressive_color_slider_track_inactive));
 
         if (SettingsThemeHelper.isExpressiveTheme(getContext())) {
             Resources res = getContext().getResources();
             mSlider.setTrackHeight(res.getDimensionPixelSize(
-                    com.android.settingslib.widget.preference.slider.R.dimen
-                    .settingslib_expressive_slider_track_height));
+                    com.android.settingslib.widget.preference.slider.R.dimen.settingslib_expressive_slider_track_height));
             mSlider.setTrackInsideCornerSize(res.getDimensionPixelSize(
-                    com.android.settingslib.widget.preference.slider.R.dimen
-                    .settingslib_expressive_slider_track_inside_corner_size));
+                    com.android.settingslib.widget.preference.slider.R.dimen.settingslib_expressive_slider_track_inside_corner_size));
             mSlider.setTrackStopIndicatorSize(res.getDimensionPixelSize(
-                    com.android.settingslib.widget.preference.slider.R.dimen
-                    .settingslib_expressive_slider_track_stop_indicator_size));
+                    com.android.settingslib.widget.preference.slider.R.dimen.settingslib_expressive_slider_track_stop_indicator_size));
             mSlider.setThumbWidth(res.getDimensionPixelSize(
-                    com.android.settingslib.widget.preference.slider.R.dimen
-                    .settingslib_expressive_slider_thumb_width));
+                    com.android.settingslib.widget.preference.slider.R.dimen.settingslib_expressive_slider_thumb_width));
             mSlider.setThumbHeight(res.getDimensionPixelSize(
-                    com.android.settingslib.widget.preference.slider.R.dimen
-                    .settingslib_expressive_slider_thumb_height));
+                    com.android.settingslib.widget.preference.slider.R.dimen.settingslib_expressive_slider_thumb_height));
             mSlider.setThumbElevation(res.getDimensionPixelSize(
-                    com.android.settingslib.widget.preference.slider.R.dimen
-                    .settingslib_expressive_slider_thumb_elevation));
+                    com.android.settingslib.widget.preference.slider.R.dimen.settingslib_expressive_slider_thumb_elevation));
             mSlider.setThumbStrokeWidth(0);
             mSlider.setThumbTrackGapSize(res.getDimensionPixelSize(
-                    com.android.settingslib.widget.preference.slider.R.dimen
-                    .settingslib_expressive_slider_thumb_track_gap_size));
+                    com.android.settingslib.widget.preference.slider.R.dimen.settingslib_expressive_slider_thumb_track_gap_size));
             mSlider.setTickActiveRadius(res.getDimensionPixelSize(
-                    com.android.settingslib.widget.preference.slider.R.dimen
-                    .settingslib_expressive_slider_tick_radius));
+                    com.android.settingslib.widget.preference.slider.R.dimen.settingslib_expressive_slider_tick_radius));
             mSlider.setTickInactiveRadius(res.getDimensionPixelSize(
-                    com.android.settingslib.widget.preference.slider.R
-                    .dimen.settingslib_expressive_slider_tick_radius));
+                    com.android.settingslib.widget.preference.slider.R.dimen.settingslib_expressive_slider_tick_radius));
         }
 
         mValueTextView = (TextView) holder.findViewById(R.id.value);
@@ -411,7 +401,8 @@ public class CustomSeekBarPreference extends Preference implements Slider.OnChan
 
     public void setMax(int max) {
         mMaxValue = max;
-        if (mSlider != null) mSlider.setValueTo(mMaxValue);
+        if (mSlider != null)
+            mSlider.setValueTo(mMaxValue);
     }
 
     public int getMax() {
@@ -420,12 +411,14 @@ public class CustomSeekBarPreference extends Preference implements Slider.OnChan
 
     public void setMin(int min) {
         mMinValue = min;
-        if (mSlider != null) mSlider.setValueFrom(mMinValue);
+        if (mSlider != null)
+            mSlider.setValueFrom(mMinValue);
     }
 
     public void setValue(int newValue) {
         mValue = getLimitedValue(newValue);
-        if (mSlider != null) mSlider.setValue(mValue);
+        if (mSlider != null)
+            mSlider.setValue(mValue);
         onValueChange(mSlider, mValue, false);
         notifyChanged();
     }
@@ -433,11 +426,13 @@ public class CustomSeekBarPreference extends Preference implements Slider.OnChan
     public void setValue(int newValue, boolean update) {
         newValue = getLimitedValue(newValue);
         if (mValue != newValue) {
-            if (!callChangeListener(newValue)) return;
+            if (!callChangeListener(newValue))
+                return;
             mValue = newValue;
             persistInt(newValue);
             changeValue(newValue);
-            if (update && mSlider != null) mSlider.setValue(newValue);
+            if (update && mSlider != null)
+                mSlider.setValue(newValue);
             updateValueViews();
             notifyChanged();
         }

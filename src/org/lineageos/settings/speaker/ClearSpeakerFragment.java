@@ -50,7 +50,8 @@ public class ClearSpeakerFragment extends PreferenceFragmentCompat implements Co
     }
 
     private boolean startPlaying() {
-        if (getActivity() == null) return false;
+        if (getActivity() == null)
+            return false;
         getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         mMediaPlayer = new MediaPlayer();

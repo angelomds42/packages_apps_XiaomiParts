@@ -33,10 +33,10 @@ public final class RefreshUtils {
 
     private void syncSystemValues() {
         if (!mIsOverridden) {
-            mDefaultMinRate = Settings.System.getFloat(mContext.getContentResolver(), 
-                Constants.KEY_MIN_REFRESH_RATE, 60.0f);
-            mDefaultPeakRate = Settings.System.getFloat(mContext.getContentResolver(), 
-                Constants.KEY_PEAK_REFRESH_RATE, 60.0f);
+            mDefaultMinRate = Settings.System.getFloat(mContext.getContentResolver(),
+                    Constants.KEY_MIN_REFRESH_RATE, 60.0f);
+            mDefaultPeakRate = Settings.System.getFloat(mContext.getContentResolver(),
+                    Constants.KEY_PEAK_REFRESH_RATE, 60.0f);
         }
     }
 

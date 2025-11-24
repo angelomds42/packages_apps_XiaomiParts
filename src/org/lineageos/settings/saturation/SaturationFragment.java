@@ -86,8 +86,7 @@ public class SaturationFragment extends PreferenceFragmentCompat
                     getContext(),
                     SaturationTileService.class,
                     R.string.saturation_title,
-                    R.drawable.ic_saturation_tile
-            );
+                    R.drawable.ic_saturation_tile);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -130,7 +129,7 @@ public class SaturationFragment extends PreferenceFragmentCompat
     void addViewPager(LayoutPreference preview) {
         mViewPager = preview.findViewById(R.id.viewpager);
 
-        int[] drawables = new int[]{
+        int[] drawables = new int[] {
                 R.drawable.image_preview1,
                 R.drawable.image_preview2,
                 R.drawable.image_preview3
@@ -158,8 +157,7 @@ public class SaturationFragment extends PreferenceFragmentCompat
         mDotIndicators = new ImageView[mViewPagerImages.length];
         for (int i = 0; i < mViewPagerImages.length; i++) {
             final ImageView imageView = new ImageView(getContext());
-            final ViewGroup.MarginLayoutParams lp =
-                    new ViewGroup.MarginLayoutParams(12, 12);
+            final ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(12, 12);
             lp.setMargins(6, 0, 6, 0);
             imageView.setLayoutParams(lp);
             mDotIndicators[i] = imageView;

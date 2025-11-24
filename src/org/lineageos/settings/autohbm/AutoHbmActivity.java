@@ -17,7 +17,9 @@ public class AutoHbmActivity extends CollapsingToolbarBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportFragmentManager().beginTransaction().replace(com.android.settingslib.collapsingtoolbar.R.id.content_frame,
-                new AutoHbmFragment(), TAG).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(com.android.settingslib.collapsingtoolbar.R.id.content_frame,
+                        new AutoHbmFragment(), TAG)
+                .commit();
     }
 }

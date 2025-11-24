@@ -75,7 +75,8 @@ public class RefreshFragment extends PreferenceFragmentCompat
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             Context context = getContext();
-            if (context == null) return;
+            if (context == null)
+                return;
 
             PackageManager pm = context.getPackageManager();
             List<AppProfilePreference> prefs = new ArrayList<>();

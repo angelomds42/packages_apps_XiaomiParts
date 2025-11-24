@@ -15,7 +15,8 @@ import org.lineageos.settings.R;
 
 public class TileUtils {
 
-    public static void requestAddTileService(Context context, Class<?> tileServiceClass, int labelResId, int iconResId) {
+    public static void requestAddTileService(Context context, Class<?> tileServiceClass, int labelResId,
+            int iconResId) {
         ComponentName componentName = new ComponentName(context, tileServiceClass);
         String label = context.getString(labelResId);
         Icon icon = Icon.createWithResource(context, iconResId);
@@ -28,8 +29,7 @@ public class TileUtils {
                     label,
                     icon,
                     context.getMainExecutor(),
-                    result -> handleResult(context, result)
-            );
+                    result -> handleResult(context, result));
         }
     }
 

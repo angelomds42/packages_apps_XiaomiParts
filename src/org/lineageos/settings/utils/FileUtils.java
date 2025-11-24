@@ -25,7 +25,8 @@ public class FileUtils {
 
     /**
      * Reads the first line of text from the given file.
-     * Reference {@link BufferedReader#readLine()} for clarification on what a line is
+     * Reference {@link BufferedReader#readLine()} for clarification on what a line
+     * is
      *
      * @return the read line contents, or null on failure
      */
@@ -55,8 +56,9 @@ public class FileUtils {
 
     /**
      * Write a string value to the specified file.
-     * @param filename      The filename
-     * @param value         The value
+     * 
+     * @param filename The filename
+     * @param value    The value
      */
     public static void writeValue(String filename, String value) {
         if (filename == null) {
@@ -75,11 +77,13 @@ public class FileUtils {
     }
 
     /**
-     * Returns the contents of the file with the given filename, or the specified default value if the file cannot be read.
+     * Returns the contents of the file with the given filename, or the specified
+     * default value if the file cannot be read.
      *
      * @param filename the name of the file to read
      * @param defValue the default value to return if the file cannot be read
-     * @return the contents of the file as a String, or the default value if the file cannot be read
+     * @return the contents of the file as a String, or the default value if the
+     *         file cannot be read
      */
     public static String getFileValue(String filename, String defValue) {
         String fileValue = readOneLine(filename);
