@@ -66,4 +66,7 @@ public class Constants {
     // Refresh Rate
     public static final String KEY_MIN_REFRESH_RATE = "min_refresh_rate";
     public static final String KEY_PEAK_REFRESH_RATE = "peak_refresh_rate";
+    public static final String KEY_REFRESH_MAIN_SWITCH = "refresh_main_switch";
+    public static final String REFRESH_PREF_KEY_PREFIX = "refresh_profile_";
+    public static final String REFRESH_DEFAULT_PROFILE_VALUE = "0";
 }

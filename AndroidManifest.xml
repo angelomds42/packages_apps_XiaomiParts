@@ -185,6 +185,27 @@
             </intent-filter>
         </service>
 
+        <!-- Refresh Rate active -->
+	    <service
+            android:name=".refreshrate.RefreshService"
+            android:exported="false" />
+
+        <!-- Refresh Rate service -->
+        <activity
+            android:name=".refreshrate.RefreshActivity"
+            android:label="@string/refresh_rate_title"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.display" />
+            <meta-data
+                android:name="com.android.settings.summary"
+                android:resource="@string/refresh_rate_summary" />
+        </activity>
+
         <!-- Refresh Rate title service -->
         <service
             android:name=".refreshrate.RefreshTileService"

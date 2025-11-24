@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto">
+    
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="refresh_intro"
+        android:title="@string/refresh_rate_summary" />
+
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="refresh_main_switch"
+        android:title="@string/refresh_rate_title"
+        android:summary="@string/refresh_rate_summary" 
+        android:defaultValue="false" />
+
+    <PreferenceCategory
+        android:key="refresh_per_app_category"
+        android:title="@string/thermal_per_app_profile_title"
+        android:dependency="refresh_main_switch" />
+
+</PreferenceScreen>

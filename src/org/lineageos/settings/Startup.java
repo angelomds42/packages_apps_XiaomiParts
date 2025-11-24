@@ -56,5 +56,17 @@ import org.lineageos.settings.utils.ComponentUtils;
          // Saturation
          SaturationFragment saturationFragment = new SaturationFragment();
          saturationFragment.restoreSaturationSetting(context);
+
+	 // Refresh Rate
+         boolean isRefreshProfilesSupported = true;
+
+         ComponentUtils.toggleService(context,
+                 isRefreshProfilesSupported,
+                 Constants.KEY_REFRESH_MAIN_SWITCH,
+                 org.lineageos.settings.refreshrate.RefreshService.class);
+
+	 ComponentUtils.toggleComponent(context, org.lineageos.settings.refreshrate.RefreshActivity.class, isRefreshProfilesSupported);
+         ComponentUtils.toggleComponent(context, org.lineageos.settings.refreshrate.RefreshTileService.class, isRefreshProfilesSupported);
+
      }
  }

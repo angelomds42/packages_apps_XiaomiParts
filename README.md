@@ -5,7 +5,7 @@
 | **Display** | `Automatic high brightness mode (HBM)` | Enable peak luminance based on sunlight | Yes |
 |  | `Automatic DC Dimming` | Enable anti-flicker mode based on screen brightness | Yes |
 |  | `Saturation` | Control the saturation level of the display | Yes |
-|  | `Refresh rate` | Easily change the refresh rate | Yes |
+|  | `Refresh rate Control` | Control the refresh rate of each application and change it easily. | Yes |
 | **Sound** | `Clear speaker` | Plays a 30-second audio to clear the speaker | No |
 | **Battery** | `Dynamic thermal profiles` | Optimize thermal management by setting specific profiles for each app | No |
 

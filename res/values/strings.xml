@@ -78,5 +78,11 @@
     <string name="thermal_auto_selection_summary">Allows the system to choose the best thermal profile for the application in use.</string>
 
     <!-- Refresh Rate -->
-    <string name="refresh_rate_title">Refresh rate</string>
+    <string name="refresh_rate_title">Per-app refresh rate</string>
+    <string name="refresh_rate_summary">Set a specific refresh rate for each application individually</string>    <string-array name="refresh_profile_entries">
+    	<item>Default</item>
+    	<item>60Hz</item>
+    	<item>90Hz</item>
+    </string-array>
+
 </resources>

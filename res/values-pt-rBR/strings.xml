@@ -78,5 +78,11 @@
     <string name="thermal_auto_selection_summary">Permite que o sistema escolha o melhor perfil térmico para o aplicativo em uso.</string>
 
     <!-- Refresh Rate -->
-    <string name="refresh_rate_title">Taxa de Atualização</string>
+    <string name="refresh_rate_title">Taxa de atualização por app</string>
+    <string name="refresh_rate_summary">Defina uma taxa de atualização específica para cada aplicativo individualmente</string>    <string-array name="refresh_profile_entries">
+        <item>Padrão</item>
+        <item>60Hz</item>
+        <item>90Hz</item>
+    </string-array>
+
 </resources>
