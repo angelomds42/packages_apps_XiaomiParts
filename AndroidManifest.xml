@@ -16,7 +16,7 @@
         android:label="@string/xiaomi_parts_title"
         android:defaultToDeviceProtectedStorage="true"
         android:directBootAware="true"
-        android:theme="@style/Theme.SubSettingsBase"
+        android:theme="@style/Theme.SubSettingsBase.Expressive"
         android:exported="true">
 
         <provider
