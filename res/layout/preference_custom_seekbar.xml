@@ -112,12 +112,23 @@
                 android:layout_centerVertical="true"
                 android:visibility="gone" />
 
-            <LinearLayout
-                android:id="@+id/seekbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_centerVertical="true" />
+
+             <LinearLayout
+                 android:id="@+id/seekbar"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="3dp"
+                 android:layout_marginEnd="3dp"
+                 android:layout_centerVertical="true">
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.MaterialComponents.DayNight"
+                    style="@style/SettingslibSliderStyle.Expressive" />
+
+            </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
 
